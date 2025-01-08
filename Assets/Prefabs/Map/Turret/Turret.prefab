@@ -166,7 +166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8688314406330707073}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.86, y: 258.31378, z: -63.647507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -187,9 +187,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 5
+  _fireRate: 2.5
   _muzzle: {fileID: 939995588080006710}
   _bulletPrefab: {fileID: 6336558582189037822, guid: f8d56c59d9414cf4bbc92ede93b33732,
     type: 3}
+  _shieldNewColor: {r: 0, g: 0, b: 0, a: 0}
+  _shieldController: {fileID: 0}
 --- !u!114 &5028156079610770842
 MonoBehaviour:
   m_ObjectHideFlags: 0

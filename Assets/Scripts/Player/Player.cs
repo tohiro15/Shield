@@ -24,8 +24,7 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _playerController =GetComponent<PlayerController>();
         _shieldController = GetComponentInChildren<ShieldController>();
-
-        _shieldController.ShieldOffset(transform, _distanceFromPlayer);
+        _shieldController.Initialize(transform, _distanceFromPlayer);
     }
     void FixedUpdate()
     {
