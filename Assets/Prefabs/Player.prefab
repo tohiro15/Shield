@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 5238023396727574869}
   - component: {fileID: 7632217352993321206}
   - component: {fileID: 889758644631231842}
-  - component: {fileID: 6656433619084429025}
+  - component: {fileID: 7576520760918817741}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Shield
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3519
+  m_VersionIndex: 3531
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -971,8 +971,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!135 &6656433619084429025
-SphereCollider:
+--- !u!65 &7576520760918817741
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -990,5 +990,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.74
-  m_Center: {x: 0, y: 0, z: -0.24}
+  m_Size: {x: 1.5213265, y: 1.9766948, z: 0.84803915}
+  m_Center: {x: 0, y: 0, z: 0.0000007003546}
