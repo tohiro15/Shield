@@ -219,10 +219,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016f199b5700c8a4991f126d53910000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 6
+  _movementSpeed: 5
   _evadeSpeed: 7
   _distanceFromPlayer: 1.5
   _shieldRotateSpeed: 110
+  _bulletPrefab: {fileID: 6336558582189037822, guid: 80179ac14a9735f4bb7a3dfee37734e6,
+    type: 3}
+  _bulletSpawnTransform: {fileID: 1196000883949607243}
+  _bulletSpeed: 10
+  _validTags:
+  - Box
+  - Turret
+  - Barrel
+  _bulletController: {fileID: 0}
 --- !u!114 &2520544103649386173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7639487615118656139}
   - component: {fileID: 2223676528025860890}
+  - component: {fileID: 2420296049208578871}
   - component: {fileID: 98872392261364176}
   - component: {fileID: 4955838317785455896}
   - component: {fileID: 2622296864126640687}
@@ -385,6 +395,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21444e2808c3aa7448caeab6772f53aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2420296049208578871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6889254085078801006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b42985c3a9f854e869226b21ad3c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &98872392261364176
@@ -839,7 +861,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 3567
+  m_VersionIndex: 3591
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

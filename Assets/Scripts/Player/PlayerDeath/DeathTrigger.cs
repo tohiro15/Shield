@@ -3,11 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class DeathTrigger : MonoBehaviour
 {
-    [SerializeField] private string[] validTags;
+    [SerializeField] private string[] _validTags;
 
     private void OnTriggerEnter(Collider other)
     {
-        foreach (string tag in validTags)
+        foreach (string tag in _validTags)
         {
             if (other.CompareTag(tag))
             {

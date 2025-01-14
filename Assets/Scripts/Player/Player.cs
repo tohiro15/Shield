@@ -15,16 +15,30 @@ public class Player : MonoBehaviour
     [SerializeField] private float _distanceFromPlayer;
     [SerializeField] private float _shieldRotateSpeed;
 
+    [Header("Bullet Settings")]
+    [Space]
+
+    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private Transform _bulletSpawnTransform;
+    [SerializeField] private float _bulletSpeed;
+    [SerializeField] private string[] _validTags;
+
     private PlayerController _playerController;
     private ShieldController _shieldController;
+    public BulletController _bulletController;
     private Rigidbody _rigidbody;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _playerController =GetComponent<PlayerController>();
+
+        _playerController = GetComponent<PlayerController>();
+
         _shieldController = GetComponentInChildren<ShieldController>();
         _shieldController.Initialize(transform, _distanceFromPlayer);
+
+        _bulletController = GetComponentInChildren<BulletController>();
+        _bulletController.Initialize(_bulletPrefab, _bulletSpawnTransform, _validTags, _bulletSpeed);
     }
     void FixedUpdate()
     {

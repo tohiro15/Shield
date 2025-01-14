@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4967ba0bc6e4914bb6725c18e969dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  validTags:
+  _validTags:
   - Player
   - Shield
 --- !u!33 &2185550417089523939

@@ -5,7 +5,7 @@ public class TurretBarrier : MonoBehaviour
     [SerializeField] private float _bulletSpeed = 3f;
     [SerializeField] private float _fireRate = 1f;
     [SerializeField] private Transform _muzzle;
-    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private GameObject _turretBulletPrefab;
     [SerializeField] private Color _shieldNewColor;
     private float _nextFireTime;
 
@@ -27,7 +27,7 @@ public class TurretBarrier : MonoBehaviour
 
     public void FireTurret()
     {
-        GameObject newBullet = Instantiate(_bulletPrefab, _muzzle.position, _muzzle.rotation);
+        GameObject newBullet = Instantiate(_turretBulletPrefab, _muzzle.position, _muzzle.rotation);
         BarrierBullet bullet = newBullet.GetComponent<BarrierBullet>();
         if (bullet != null)
         {

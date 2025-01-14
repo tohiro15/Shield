@@ -2975,6 +2975,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 89267306}
+    - target: {fileID: 4417356466064841134, guid: 5223178dd60035541806379a85485e66,
+        type: 3}
+      propertyPath: m_SelectedEdges.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417356466064841134, guid: 5223178dd60035541806379a85485e66,
+        type: 3}
+      propertyPath: m_SelectedVertices.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8060172659406322246, guid: 5223178dd60035541806379a85485e66,
         type: 3}
       propertyPath: m_Name
