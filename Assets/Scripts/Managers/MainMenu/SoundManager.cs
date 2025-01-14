@@ -32,21 +32,4 @@ public class SoundManager : MonoBehaviour
         }
         return 0f;
     }
-
-    public void SaveVolume(string parameter, float volume)
-    {
-        PlayerPrefs.SetFloat(parameter, volume);
-    }
-
-    public void LoadVolume(string parameter)
-    {
-        float volume = PlayerPrefs.GetFloat(parameter, 0f);
-        SetVolume(parameter, volume);
-    }
-
-    private void Start()
-    {
-        float savedVolume = PlayerPrefs.GetFloat("MasterVolume", 0);
-        audioMixer.SetFloat("MasterVolume", savedVolume);
-    }
 }

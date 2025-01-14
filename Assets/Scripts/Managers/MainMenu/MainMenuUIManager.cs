@@ -109,6 +109,12 @@ public class MainMenuUIManager : MonoBehaviour
         _levelSelectionCanvas.SetActive(false);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Вы вышли из игры.");
+    }
+
     #endregion
     #region ChangeChapter
     public void NextChapterChange()
