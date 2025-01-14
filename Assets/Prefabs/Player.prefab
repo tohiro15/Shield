@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4188456738617438155}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32333058, y: -0, z: -0, w: 0.9462861}
-  m_LocalPosition: {x: 0, y: 8.33, z: -5.64}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 19, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7490686678745368543}
-  m_LocalEulerAnglesHint: {x: 37.729, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!20 &8677873779876918408
 Camera:
   m_ObjectHideFlags: 0
@@ -200,7 +200,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: -94.38}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.55, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1615862842843394801}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 6
-  _evadeSpeed: 6
+  _evadeSpeed: 7
   _distanceFromPlayer: 1.5
   _shieldRotateSpeed: 110
 --- !u!114 &2520544103649386173
