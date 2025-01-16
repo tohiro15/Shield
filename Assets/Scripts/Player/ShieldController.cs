@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShieldController : MonoBehaviour
@@ -17,18 +18,11 @@ public class ShieldController : MonoBehaviour
     }
     public void RotateAroundPlayer(Transform player, float rotateSpeed)
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            direction = -1;
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            direction = 1;
-        }
+        float horizontalInput = Input.GetAxis("Horizontal");
 
-        if (direction != 0)
-        {
-            transform.RotateAround(player.transform.position, Vector3.up, direction * rotateSpeed * Time.deltaTime);
-        }
+        if (horizontalInput < 0) direction = -1;
+        else if (horizontalInput > 0) direction = 1;
+
+        if (direction != 0)transform.RotateAround(player.transform.position, Vector3.up, direction * rotateSpeed * Time.deltaTime);
     }
 }
