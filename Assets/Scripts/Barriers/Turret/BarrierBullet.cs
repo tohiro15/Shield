@@ -8,7 +8,7 @@ public class BarrierBullet : MonoBehaviour
     {
         if (other.CompareTag("Shield"))
         {
-            other.GetComponent<BulletController>().LoadBullet();
+            other.GetComponentInParent<BulletController>().LoadBullet();
             Destroy(gameObject);
         }
     }

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [Header("Shield Settings")]
     [Space]
 
+    [SerializeField] private Transform _shieldTransform;
     [SerializeField] private float _distanceFromPlayer;
     [SerializeField] private float _shieldRotateSpeed;
 
@@ -34,10 +35,10 @@ public class Player : MonoBehaviour
 
         _playerController = GetComponent<PlayerController>();
 
-        _shieldController = GetComponentInChildren<ShieldController>();
-        _shieldController.Initialize(transform, _distanceFromPlayer);
+        _shieldController = GetComponent<ShieldController>();
+        _shieldController.Initialize(transform, _shieldTransform, _distanceFromPlayer);
 
-        _bulletController = GetComponentInChildren<BulletController>();
+        _bulletController = GetComponent<BulletController>();
         _bulletController.Initialize(_bulletPrefab, _bulletSpawnTransform, _validTags, _bulletSpeed);
     }
     void FixedUpdate()
@@ -46,6 +47,6 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        _shieldController.RotateAroundPlayer(transform, _shieldRotateSpeed);
+        _shieldController.RotateAroundPlayer(transform, _shieldTransform, _shieldRotateSpeed);
     }
 }
