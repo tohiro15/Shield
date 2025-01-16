@@ -1373,7 +1373,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0422\u044B \u043D\u0430\u0445\u043E\u0434\u0438\u0448\u044C\u0441\u044F
     \u0432 \u0442\u0440\u0430\u043D\u0441\u0435\n\u0427\u0442\u043E\u0431\u044B \u043F\u043E\u043A\u0438\u043D\u0443\u0442\u044C
-    \u0435\u0433\u043E \u0442\u0435\u0431\u0435 \u043F\u0440\u0435\u0434\u0451\u0442\u0441\u044F
+    \u0435\u0433\u043E \u0442\u0435\u0431\u0435 \u043F\u0440\u0438\u0434\u0451\u0442\u0441\u044F
     \u043E\u0432\u043B\u0430\u0434\u0435\u0442\u044C \u0446\u0435\u043B\u0435\u0443\u0441\u0442\u0440\u0435\u043C\u043B\u0451\u043D\u043D\u043E\u0441\u0442\u044C\u044E."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2166,6 +2166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6889254085078801006, guid: 6f3398d09ed5e7544b7fe21aa5ec30a6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7490686678745368543, guid: 6f3398d09ed5e7544b7fe21aa5ec30a6,
         type: 3}
@@ -4589,7 +4594,7 @@ MonoBehaviour:
   m_text: "\u0422\u0440\u0430\u043D\u0441 \u0440\u0430\u0437\u0434\u0435\u043B\u0435\u043D
     \u043D\u0430 \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u043E \u0443\u0447\u0430\u0441\u0442\u043A\u043E\u0432,
     \u043F\u0440\u0435\u043E\u0434\u043E\u043B\u0435\u0432 \u0438\u0445 \n\u0442\u044B
-    \u043E\u0432\u043B\u0430\u0434\u0435\u0435\u0449\u044C \u0435\u0439."
+    \u043E\u0432\u043B\u0430\u0434\u0435\u0435\u0448\u044C \u0435\u0439."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
