@@ -1,10 +1,18 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-    [SerializeField] private AudioMixer audioMixer;
+
+    [Header("Audio Mixers")]
+    [SerializeField] private AudioMixer _musicAudioMixer;
+    [SerializeField] private AudioMixer _sfxAudioMixer;
+    [Header("Music Clips")]
+    [SerializeField] private AudioClip _mainMenuMusicClip;
+    [SerializeField] private AudioClip[] _levelMusicClips;
+    [SerializeField] private AudioSource _musicAudioSource;
 
     private void Awake()
     {
@@ -17,19 +25,84 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void SetVolume(string parameter, float volume)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        audioMixer.SetFloat(parameter, volume);
+        string sceneName = scene.name;
+
+        AudioClip newClip = GetMusicForScene(sceneName);
+        if (newClip != null)
+        {
+            PlayMusic(newClip);
+        }
+        else
+        {
+            Debug.LogWarning($"Музыка для сцены {sceneName} не найдена!");
+        }
     }
 
-    public float GetVolume(string parameter)
+    private AudioClip GetMusicForScene(string sceneName)
     {
-        if (audioMixer.GetFloat(parameter, out float value))
+        switch (sceneName)
+        {
+            case "MainMenu":
+                return _mainMenuMusicClip;
+            case "Level_1":
+                return _levelMusicClips[0];
+            case "Level_2":
+                return _levelMusicClips[1];
+            case "Level_3":
+                return _levelMusicClips[2];
+            default:
+                return null;
+        }
+    }
+
+    private void PlayMusic(AudioClip clip)
+    {
+        if (_musicAudioSource == null)
+        {
+            _musicAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        _musicAudioSource.Stop();
+        _musicAudioSource.clip = clip;
+        _musicAudioSource.Play();
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        _musicAudioMixer.SetFloat("MusicVolume", volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        _sfxAudioMixer.SetFloat("SFXVolume", volume);
+    }
+
+    public float GetMusicVolume()
+    {
+        if (_musicAudioMixer.GetFloat("MusicVolume", out float value))
         {
             return value;
         }
         return 0f;
+    }
+
+    public float GetSFXVolume()
+    {
+        if (_sfxAudioMixer.GetFloat("SFXVolume", out float value))
+        {
+            return value;
+        }
+        return 0f;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

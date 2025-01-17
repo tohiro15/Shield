@@ -5,31 +5,29 @@ public class LevelManager : MonoBehaviour
 {
     public void LoadLevel(string levelName)
     {
-        if (IsLevelExists(levelName))
+        string sceneName = GetScenePath(levelName);
+        if (sceneName != null)
         {
-            SceneManager.LoadScene(levelName);
+            SceneManager.LoadScene(sceneName);
         }
         else
         {
-            Debug.LogError($"Уровень с именем \"{levelName}\" не найден!");
+            Debug.LogError($"Уровень с именем \"{levelName}\" не найден в сборке!");
         }
     }
 
-    public void LoadDevelopment(string levelName)
+    private string GetScenePath(string levelName)
     {
-        if (IsLevelExists(levelName))
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
         {
-            SceneManager.LoadScene(levelName);
-        }
-        else
-        {
-            Debug.LogError($"Уровень для разработки с именем \"{levelName}\" не найден!");
-        }
-    }
+            string path = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneName = System.IO.Path.GetFileNameWithoutExtension(path);
 
-    private bool IsLevelExists(string levelName)
-    {
-        int sceneIndex = SceneUtility.GetBuildIndexByScenePath(levelName);
-        return sceneIndex != -1;
+            if (sceneName.Equals(levelName, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return path;
+            }
+        }
+        return null;
     }
 }
