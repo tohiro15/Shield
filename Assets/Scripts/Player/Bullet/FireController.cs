@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class FireController : MonoBehaviour
 {
     private GameObject _bulletPrefab;
     private Transform _bulletSpawn;

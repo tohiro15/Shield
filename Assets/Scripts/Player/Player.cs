@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     private PlayerController _playerController;
     private ShieldController _shieldController;
-    public BulletController _bulletController;
+    public FireController _fireController;
     private Rigidbody _rigidbody;
 
     private void Start()
@@ -38,8 +38,8 @@ public class Player : MonoBehaviour
         _shieldController = GetComponent<ShieldController>();
         _shieldController.Initialize(transform, _shieldTransform, _distanceFromPlayer);
 
-        _bulletController = GetComponent<BulletController>();
-        _bulletController.Initialize(_bulletPrefab, _bulletSpawnTransform, _validTags, _bulletSpeed);
+        _fireController = GetComponent<FireController>();
+        _fireController.Initialize(_bulletPrefab, _bulletSpawnTransform, _validTags, _bulletSpeed);
     }
     void FixedUpdate()
     {

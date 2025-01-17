@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
     private float _bulletSpeed = 5f;
     public void Initialize(string[] validTags, float bulletSpeed)
     {
-        _validTags = new string[validTags.Length];
+        _validTags = validTags;
         for (int i = 0; i < validTags.Length; i++)
         {
             _validTags[i] = validTags[i];
@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(gameObject);
                 Destroy(other.gameObject);
+                break;
             }
         }
     }
