@@ -8,7 +8,7 @@ public class FireController : MonoBehaviour
     private string[] _validTags;
     private float _bulletSpeed;
 
-    private bool _canFire;
+    private bool _canFire = false;
 
     public void Initialize(GameObject playerBulletPrefab, Transform bulletSpawnTransform, string[] validTags, float bulletSpeed)
     {
@@ -31,7 +31,13 @@ public class FireController : MonoBehaviour
     private void Fire()
     {
         GameObject newBullet = Instantiate(_bulletPrefab, _bulletSpawn.position, _bulletSpawn.rotation);
-        newBullet.GetComponent<Bullet>().Initialize(_validTags, _bulletSpeed);
+        Bullet bulletScript = newBullet.GetComponent<Bullet>();
+
+        if (bulletScript != null)
+        {
+            bulletScript.Initialize(_validTags, _bulletSpeed);
+        }
+
         _canFire = false;
     }
     public void LoadBullet()

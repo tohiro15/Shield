@@ -8275,11 +8275,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e916454fd19ed043ba4f6b705afa156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _musicAudioMixer: {fileID: 0}
-  _sfxAudioMixer: {fileID: 0}
-  _mainMenuMusicClip: {fileID: 0}
-  _levelMusicClips: []
-  _audioSource: {fileID: 0}
+  _musicAudioMixer: {fileID: 24100000, guid: e0164dad1032a304fb7ee484ff169b7a, type: 2}
+  _sfxAudioMixer: {fileID: 24100000, guid: 966ec03a0785e934fb8723f35c7f885f, type: 2}
+  _mainMenuMusicClip: {fileID: 8300000, guid: f2287c9cb20e8d049b7a8fd17db2f4d9, type: 3}
+  _developmentMusicClip: {fileID: 8300000, guid: e8548fa84724b624d89bfd6762beb9bb,
+    type: 3}
+  _levelMusicClips:
+  - {fileID: 8300000, guid: 4ab6698f7a245d94b86dac1a9c8dfa94, type: 3}
+  - {fileID: 8300000, guid: 8a43edcd15bfdf6499780dc0504345e2, type: 3}
+  - {fileID: 8300000, guid: 5b75a8c80ca782248a6fc7591b24b043, type: 3}
+  _musicAudioSource: {fileID: 1518190833}
 --- !u!82 &1518190833
 AudioSource:
   m_ObjectHideFlags: 0

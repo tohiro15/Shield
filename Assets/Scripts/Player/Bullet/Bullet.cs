@@ -1,29 +1,28 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Bullet : MonoBehaviour
 {
-    private string[] _validTags;
+    private HashSet<string> _validTags;
     private float _bulletSpeed = 5f;
+
     public void Initialize(string[] validTags, float bulletSpeed)
     {
-        _validTags = validTags;
-        for (int i = 0; i < validTags.Length; i++)
+        if (validTags == null || validTags.Length == 0)
         {
-            _validTags[i] = validTags[i];
+            Debug.LogError("Нет валидных тегов для пули!");
+            return;
         }
-        _bulletSpeed = bulletSpeed;
+        _validTags = new HashSet<string>(validTags);
+        _bulletSpeed = bulletSpeed > 0 ? bulletSpeed : 5f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        foreach (string tag in _validTags)
+        if (_validTags.Contains(other.tag))
         {
-            if (other.CompareTag(tag))
-            {
-                Destroy(gameObject);
-                Destroy(other.gameObject);
-                break;
-            }
+            Destroy(gameObject);
+            Destroy(other.gameObject);
         }
     }
 

@@ -32,21 +32,52 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        if (_rigidbody == null)
+        {
+            Debug.LogError("Rigidbody не найден!  омпонент будет добавлен автоматически.");
+            _rigidbody = gameObject.AddComponent<Rigidbody>();
+        }
 
         _playerController = GetComponent<PlayerController>();
+        if (_playerController == null)
+        {
+            Debug.LogError("PlayerController не найден!");
+        }
 
         _shieldController = GetComponent<ShieldController>();
-        _shieldController.Initialize(transform, _shieldTransform, _distanceFromPlayer);
+        if (_shieldController == null)
+        {
+            Debug.LogError("ShieldController не найден!");
+        }
+        else
+        {
+            _shieldController.Initialize(transform, _shieldTransform, _distanceFromPlayer);
+        }
 
         _fireController = GetComponent<FireController>();
-        _fireController.Initialize(_bulletPrefab, _bulletSpawnTransform, _validTags, _bulletSpeed);
+        if (_fireController == null)
+        {
+            Debug.LogError("FireController не найден!");
+        }
+        else
+        {
+            _fireController.Initialize(_bulletPrefab, _bulletSpawnTransform, _validTags, _bulletSpeed);
+        }
     }
+
     void FixedUpdate()
     {
-        _playerController.Movement(_movementSpeed, _evadeSpeed, _rigidbody);
+        if (_playerController != null)
+        {
+            _playerController.Movement(_movementSpeed, _evadeSpeed, _rigidbody);
+        }
     }
+
     private void Update()
     {
-        _shieldController.RotateAroundPlayer(transform, _shieldTransform, _shieldRotateSpeed);
+        if (_shieldController != null)
+        {
+            _shieldController.RotateAroundPlayer(transform, _shieldTransform, _shieldRotateSpeed);
+        }
     }
 }

@@ -11,6 +11,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioMixer _sfxAudioMixer;
     [Header("Music Clips")]
     [SerializeField] private AudioClip _mainMenuMusicClip;
+    [SerializeField] private AudioClip _developmentMusicClip;
     [SerializeField] private AudioClip[] _levelMusicClips;
     [SerializeField] private AudioSource _musicAudioSource;
 
@@ -50,6 +51,8 @@ public class SoundManager : MonoBehaviour
         {
             case "MainMenu":
                 return _mainMenuMusicClip;
+            case "Development":
+                return _developmentMusicClip;
             case "Level_1":
                 return _levelMusicClips[0];
             case "Level_2":
