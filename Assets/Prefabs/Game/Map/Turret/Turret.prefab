@@ -206,7 +206,7 @@ MonoBehaviour:
   _muzzle: {fileID: 939995588080006710}
   _turretBulletPrefab: {fileID: 6336558582189037822, guid: f8d56c59d9414cf4bbc92ede93b33732,
     type: 3}
-  _shieldNewColor: {r: 0, g: 0, b: 0, a: 0}
+  _shieldNewColor: {r: 0.3443396, g: 1, b: 0.5444757, a: 0.6666667}
 --- !u!33 &5071086001737658688
 MeshFilter:
   m_ObjectHideFlags: 0
