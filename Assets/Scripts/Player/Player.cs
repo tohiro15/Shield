@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {

@@ -9,6 +9,7 @@ TagManager:
   - Barrel
   - Turret
   - Blade
+  - TextDelay
   layers:
   - Default
   - TransparentFX
