@@ -968,6 +968,8 @@ GameObject:
   - component: {fileID: 391451781}
   - component: {fileID: 391451783}
   - component: {fileID: 391451782}
+  - component: {fileID: 391451785}
+  - component: {fileID: 391451784}
   m_Layer: 5
   m_Name: Hi (2)
   m_TagString: Untagged
@@ -1019,7 +1021,7 @@ MonoBehaviour:
     \u0431\u0435\u0441\u043A\u043E\u043D\u0435\u0447\u043D\u043E \u0432\u0440\u0430\u0449\u0430\u0442\u044C\u0441\u044F
     \u0432\u043E\u043A\u0440\u0443\u0433 \u0442\u0435\u0431\u044F\n\u0432 \u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0438
     \u0442\u0432\u043E\u0435\u0433\u043E \u043F\u043E\u0441\u043B\u0435\u0434\u043D\u0435\u0433\u043E
-    \u0448\u0430\u0433\u0430"
+    \u0448\u0430\u0433\u0430."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -1096,6 +1098,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 391451780}
   m_CullTransparentMesh: 1
+--- !u!65 &391451784
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391451780}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 16.539875, y: 4.864973, z: 1}
+  m_Center: {x: -0.19991302, y: -0.22656965, z: 3.3296442e-16}
+--- !u!54 &391451785
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391451780}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 118
+  m_CollisionDetection: 0
 --- !u!4 &434455881 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30966779863765478, guid: 0bf076c2cf047a04f8de6e18e9da57d4,
@@ -1340,7 +1390,7 @@ MonoBehaviour:
   m_text: "M\u043D\u0435 \u043A\u0430\u0436\u0435\u0442\u0441\u044F \u0447\u0442\u043E
     \u0441\u0442\u0435\u043D\u044B \u044D\u0442\u043E \u0432\u043D\u0435\u0448\u043D\u0438\u0435
     \u0444\u0430\u043A\u0442\u043E\u0440\u044B \n\u043D\u0430 \u043A\u043E\u0442\u043E\u0440\u044B\u0435
-    \u043C\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u043C \u0432\u043B\u0438\u044F\u0442\u044C"
+    \u043C\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u043C \u0432\u043B\u0438\u044F\u0442\u044C."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -1741,13 +1791,15 @@ GameObject:
   - component: {fileID: 602804483}
   - component: {fileID: 602804485}
   - component: {fileID: 602804484}
+  - component: {fileID: 602804486}
+  - component: {fileID: 602804487}
   m_Layer: 5
   m_Name: Hi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &602804483
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1790,7 +1842,7 @@ MonoBehaviour:
   m_text: "\u0412\u0438\u0434\u0438\u0448\u044C \u044D\u0442\u0443 \u0433\u043E\u043B\u0443\u0431\u0443\u044E
     \u0448\u0442\u0443\u043A\u043E\u0432\u0438\u043D\u0443 \u043F\u0435\u0440\u0435\u0434
     \u0441\u043E\u0431\u043E\u0439?\n\u042D\u0442\u043E \u0442\u0432\u043E\u044F
-    \u0446\u0435\u043B\u0435\u0443\u0441\u0442\u0440\u0435\u043C\u043B\u0451\u043D\u043D\u043E\u0441\u044C.
+    \u0446\u0435\u043B\u0435\u0443\u0441\u0442\u0440\u0435\u043C\u043B\u0435\u043D\u043D\u043E\u0441\u0442\u044C.
     \n\u0421\u043A\u0430\u0436\u0438 \u0436\u0435 \u043F\u043E\u0445\u043E\u0436\u0430
     \u043D\u0430 \u0449\u0438\u0442?"
   m_isRightToLeft: 0
@@ -1869,6 +1921,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602804482}
   m_CullTransparentMesh: 1
+--- !u!65 &602804486
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602804482}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 16.275164, y: 3.4734933, z: 1}
+  m_Center: {x: -0.2124641, y: -0.18560147, z: -8.6119915e-16}
+--- !u!54 &602804487
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602804482}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1001 &635784828
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2177,8 +2277,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0422\u0443\u0442 \u0432\u0441\u0451 \u0441\u0438\u043C\u043C\u0432\u043E\u043B\u0438\u0447\u043D\u043E
-    \nK\u0430\u043A \u0434\u0443\u043C\u0430\u0435\u0448\u044C \u0447\u0442\u043E
+  m_text: "\u0422\u0443\u0442 \u0432\u0441\u0451 \u0441\u0438\u043C\u0432\u043E\u043B\u0438\u0447\u043D\u043E
+    \n\u041A\u0430\u043A \u0434\u0443\u043C\u0430\u0435\u0448\u044C \u0447\u0442\u043E
     \u043E\u0437\u043D\u0430\u0447\u0430\u044E\u0442 \u0441\u0442\u0435\u043D\u044B?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -2389,6 +2489,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 3561
+      objectReference: {fileID: 0}
+    - target: {fileID: 98872392261364176, guid: 6f3398d09ed5e7544b7fe21aa5ec30a6,
+        type: 3}
+      propertyPath: m_SelectedEdges.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 98872392261364176, guid: 6f3398d09ed5e7544b7fe21aa5ec30a6,
+        type: 3}
+      propertyPath: m_SelectedVertices.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 752082653965295667, guid: 6f3398d09ed5e7544b7fe21aa5ec30a6,
         type: 3}
@@ -4821,10 +4931,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u0422\u044B \u0441\u043C\u043E\u0436\u0435\u0448\u044C \u0437\u0430\u0431\u0440\u0430\u0442\u044C
-    \u0435\u0451 \u0441\u0435\u0431\u0435,\nE\u0441\u043B\u0438 \u043A\u043E\u043D\u0435\u0447\u043D\u043E
-    \u043D\u0430\u0443\u0447\u0438\u0448\u044C\u0441\u044F \u0435\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F\nK\u0441\u0442\u0430\u0442\u0438
+    \u0435\u0451 \u0441\u0435\u0431\u0435,\n\u0415\u0441\u043B\u0438 \u043A\u043E\u043D\u0435\u0447\u043D\u043E
+    \u043D\u0430\u0443\u0447\u0438\u0448\u044C\u0441\u044F \u0435\u0439 \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F\n\u041A\u0441\u0442\u0430\u0442\u0438
     \u043E\u0447\u0435\u043D\u044C \u0445\u0440\u0443\u043F\u043A\u0430\u044F\n\u0421\u043C\u043E\u0442\u0440\u0438
-    \u043D\u0435 \u0440\u0430\u0437\u0431\u0435\u0439 \u043E \u043F\u0440\u0435\u043F\u044F\u0442\u0441\u0442\u0432\u0438\u044F"
+    \u043D\u0435 \u0440\u0430\u0437\u0431\u0435\u0439 \u043E \u043F\u0440\u0435\u043F\u044F\u0442\u0441\u0442\u0432\u0438\u044F."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -5392,6 +5502,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 232301761}
   - {fileID: 900901964}
-  - {fileID: 883384472}
   - {fileID: 828739631}
   - {fileID: 2114591043}
+  - {fileID: 883384472}
