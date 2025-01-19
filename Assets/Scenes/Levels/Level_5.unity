@@ -2166,7 +2166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _smoothSpeed: 5
+  _smoothSpeed: 20
 --- !u!1001 &647532278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3168,7 +3168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _smoothSpeed: 5
+  _smoothSpeed: 20
 --- !u!1001 &946709415
 PrefabInstance:
   m_ObjectHideFlags: 0

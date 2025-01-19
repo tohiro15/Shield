@@ -6,7 +6,7 @@ using UnityEngine;
 public class StickyText : MonoBehaviour
 {
     [SerializeField] private float _delay = 2f;
-    [SerializeField] private float _smoothSpeed = 5f;
+
 
     private BoxCollider _boxCollider;
 
@@ -28,15 +28,19 @@ public class StickyText : MonoBehaviour
     {
         float elapsedTime = 0f;
 
-        Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y, point.position.z);
+        Vector3 startPosition = transform.position;
 
         while (elapsedTime < _delay)
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, transform.position.y, point.position.z), _smoothSpeed * Time.deltaTime);
+            Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y, point.position.z);
+
+            transform.position = targetPosition;
 
             elapsedTime += Time.deltaTime;
-
             yield return null;
         }
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, point.position.z);
     }
 }
+

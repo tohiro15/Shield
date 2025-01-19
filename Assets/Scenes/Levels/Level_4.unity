@@ -2668,7 +2668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _smoothSpeed: 5
+  _smoothSpeed: 20
 --- !u!1001 &612170669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3898,7 +3898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _smoothSpeed: 5
+  _smoothSpeed: 20
 --- !u!1001 &957699786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5948,7 +5948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 3
-  _smoothSpeed: 5
+  _smoothSpeed: 20
 --- !u!4 &1368913235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30966779863765478, guid: 0bf076c2cf047a04f8de6e18e9da57d4,
