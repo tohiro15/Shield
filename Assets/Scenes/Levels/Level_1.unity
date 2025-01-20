@@ -755,6 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _smoothSpeed: 3
 --- !u!65 &170171320
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1638,6 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _smoothSpeed: 5
 --- !u!65 &440826526
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2204,6 +2206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2.3
+  _smoothSpeed: 1
 --- !u!1001 &606659396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2821,6 +2824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _smoothSpeed: 11
 --- !u!65 &1118210696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3865,6 +3869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _smoothSpeed: 5
 --- !u!65 &1663257362
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4313,6 +4318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _smoothSpeed: 4
 --- !u!65 &1857422477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4599,6 +4605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _smoothSpeed: 1.5
 --- !u!65 &1957929966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5093,6 +5100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _smoothSpeed: 5
 --- !u!65 &2091764432
 BoxCollider:
   m_ObjectHideFlags: 0

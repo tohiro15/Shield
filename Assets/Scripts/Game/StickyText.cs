@@ -11,7 +11,7 @@ public class StickyText : MonoBehaviour
     private void Start()
     {
         _boxCollider = GetComponent<BoxCollider>();
-        _boxCollider.size = new Vector3(50, 1, 1);
+        _boxCollider.size = new Vector3(50, 0, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,7 +29,7 @@ public class StickyText : MonoBehaviour
         {
             Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y, point.position.z);
 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, elapsedTime / _delay);
+            transform.position = targetPosition;
 
             elapsedTime += Time.deltaTime;
             yield return null;
