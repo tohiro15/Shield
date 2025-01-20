@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 0102800e7d2c32c4a9d9fb0289566da2,
+  m_LightingDataAsset: {fileID: 112000000, guid: f949f608e3c99e647bf2c8c72b8f45b5,
     type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
@@ -755,6 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _fadeDuration: 1
 --- !u!65 &170171320
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1638,6 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _fadeDuration: 1
 --- !u!65 &440826526
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2204,6 +2206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2.3
+  _fadeDuration: 1
 --- !u!1001 &606659396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2821,6 +2824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _fadeDuration: 1
 --- !u!65 &1118210696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3865,6 +3869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _fadeDuration: 1
 --- !u!65 &1663257362
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4313,6 +4318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _fadeDuration: 1
 --- !u!65 &1857422477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4599,6 +4605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _fadeDuration: 1
 --- !u!65 &1957929966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5093,6 +5100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _fadeDuration: 1
 --- !u!65 &2091764432
 BoxCollider:
   m_ObjectHideFlags: 0

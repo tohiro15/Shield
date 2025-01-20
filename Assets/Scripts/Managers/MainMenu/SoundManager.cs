@@ -59,6 +59,12 @@ public class SoundManager : MonoBehaviour
                 return _levelMusicClips[1];
             case "Level_3":
                 return _levelMusicClips[2];
+            case "Level_4":
+                return _levelMusicClips[3];
+            case "Level_5":
+                return _levelMusicClips[4];
+            case "Level_6":
+                return _levelMusicClips[5];
             default:
                 return null;
         }
