@@ -1,12 +1,10 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 public class StickyText : MonoBehaviour
 {
     [SerializeField] private float _delay = 2f;
-
 
     private BoxCollider _boxCollider;
 
@@ -23,24 +21,19 @@ public class StickyText : MonoBehaviour
             StartCoroutine(TextDelayOnPoint(other.transform));
         }
     }
-
     private IEnumerator TextDelayOnPoint(Transform point)
     {
         float elapsedTime = 0f;
-
-        Vector3 startPosition = transform.position;
 
         while (elapsedTime < _delay)
         {
             Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y, point.position.z);
 
-            transform.position = targetPosition;
+            transform.position = Vector3.Lerp(transform.position, targetPosition, elapsedTime / _delay);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        transform.position = new Vector3(transform.position.x, transform.position.y, point.position.z);
     }
 }
 
