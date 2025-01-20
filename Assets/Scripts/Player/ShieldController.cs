@@ -13,7 +13,7 @@ public class ShieldController : MonoBehaviour
             return;
         }
 
-        Vector3 offset = new Vector3(0, 0, distanceFromPlayer);
+        Vector3 offset = new Vector3(0, 0.1f, distanceFromPlayer);
         shield.position = player.position + offset;
     }
     public void RotateAroundPlayer(Transform player, Transform shield, float rotateSpeed)

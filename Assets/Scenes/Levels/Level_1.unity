@@ -755,7 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _fadeDuration: 1
+  _duration: 1
 --- !u!65 &170171320
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _fadeDuration: 1
+  _duration: 1
 --- !u!65 &440826526
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2205,8 +2205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28924b2f5d6d5a34f82b6051ee2d4cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delay: 2.3
-  _fadeDuration: 1
+  _delay: 2
+  _duration: 1
 --- !u!1001 &606659396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2824,7 +2824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _fadeDuration: 1
+  _duration: 1
 --- !u!65 &1118210696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3869,7 +3869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _fadeDuration: 1
+  _duration: 1
 --- !u!65 &1663257362
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4318,7 +4318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _fadeDuration: 1
+  _duration: 1
 --- !u!65 &1857422477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4605,7 +4605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _fadeDuration: 1
+  _duration: 1
 --- !u!65 &1957929966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5100,7 +5100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
-  _fadeDuration: 1
+  _duration: 1
 --- !u!65 &2091764432
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5235,6 +5235,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2030921903}
+    - target: {fileID: 6837815142488749693, guid: 417759710aecfda46a5c4478ed98732a,
+        type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7298959269515431639, guid: 417759710aecfda46a5c4478ed98732a,
         type: 3}
       propertyPath: m_Mesh
