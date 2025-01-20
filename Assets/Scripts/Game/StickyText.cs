@@ -5,15 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class StickyText : MonoBehaviour
 {
-    [Header("Настройки прилипания")]
+    [Header("Adhesion parameters")]
     [Space]
     [SerializeField] private float _delay = 2f;
 
     private BoxCollider _boxCollider;
 
-    [Header("Настройки затухания/появление надписи")]
+    [Header("Transparency Settings")]
     [Space]
-    public float _fadeDuration = 1.0f;
+    [SerializeField] private float _duration = 1.0f;
 
     private TextMeshProUGUI _textMeshPro;
     private Color _targetColorStart;
@@ -66,9 +66,9 @@ public class StickyText : MonoBehaviour
         float timeElapsed = 0f;
         Color initialColor = _textMeshPro.color;
 
-        while (timeElapsed < _fadeDuration)
+        while (timeElapsed < _duration)
         {
-            _textMeshPro.color = Color.Lerp(initialColor, targetColor, timeElapsed / _fadeDuration);
+            _textMeshPro.color = Color.Lerp(initialColor, targetColor, timeElapsed / _duration);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
