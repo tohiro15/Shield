@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     private PlayerController _playerController;
     private ShieldController _shieldController;
-    public FireController _fireController;
+    private FireController _fireController;
     private Rigidbody _rigidbody;
 
     private void Start()

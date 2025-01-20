@@ -680,7 +680,7 @@ PrefabInstance:
     - target: {fileID: 98872392261364176, guid: 6f3398d09ed5e7544b7fe21aa5ec30a6,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 3573
+      value: 3576
       objectReference: {fileID: 0}
     - target: {fileID: 838651839432013570, guid: 6f3398d09ed5e7544b7fe21aa5ec30a6,
         type: 3}
@@ -1116,6 +1116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2.5
+  _duration: 1
 --- !u!4 &434455881 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 30966779863765478, guid: 0bf076c2cf047a04f8de6e18e9da57d4,
@@ -1452,6 +1453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _duration: 1
 --- !u!65 &454348093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2029,6 +2031,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 3
+  _duration: 1
 --- !u!1001 &616001266
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2499,6 +2502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 2
+  _duration: 1
 --- !u!65 &849158428
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4824,6 +4828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delay: 4
+  _duration: 1
 --- !u!65 &2022810701
 BoxCollider:
   m_ObjectHideFlags: 0
