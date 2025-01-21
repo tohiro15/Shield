@@ -1,28 +1,44 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuUIManager : MonoBehaviour
 {
     [Header("MainMenu Canvas")]
+    [Space]
+
     [SerializeField] private GameObject _mainMenuCanvas;
     [SerializeField] private GameObject _optionsCanvas;
     [SerializeField] private GameObject _manualCanvas;
     [SerializeField] private GameObject _levelSelectionCanvas;
 
     [Header("Change Chapter")]
+    [Space]
+
     [SerializeField] private GameObject[] _chapterLevels;
     [SerializeField] private Button _nextChapterButton;
     [SerializeField] private Button _pastChapterButton;
     [SerializeField] private TextMeshProUGUI _currentChapterText;
     private int _currentChapter = 1;
 
-    [Header("ManualMenu")]
+    [Header("Manual Menu")]
+    [Space]
+
     [SerializeField] private TextMeshProUGUI _openMenuDescriptionText;
     [SerializeField] private GameObject _manualControl;
     [SerializeField] private GameObject _manualGameplay;
 
+    [Header("Loading Menu")]
+    [Space]
+
+    [SerializeField] private GameObject _loadingCanvas;
+    [SerializeField] private Slider _loadingSlider;
+
     [Header("Options")]
+    [Space]
+
     [SerializeField] private Slider _volumeSlider;
     public string volumeParameter = "MasterVolume";
 
@@ -57,12 +73,13 @@ public class MainMenuUIManager : MonoBehaviour
         _volumeSlider.onValueChanged.AddListener(SetVolume);
     }
 
-    private void SetCanvasState(bool mainMenu, bool options, bool manual, bool levelSelection)
+    private void SetCanvasState(bool mainMenu, bool options, bool manual, bool levelSelection, bool loading = false)
     {
         _mainMenuCanvas.SetActive(mainMenu);
         _optionsCanvas.SetActive(options);
         _manualCanvas.SetActive(manual);
         _levelSelectionCanvas.SetActive(levelSelection);
+        _loadingCanvas.SetActive(loading);
     }
 
     #region MainMenuButtons
@@ -104,7 +121,60 @@ public class MainMenuUIManager : MonoBehaviour
         Debug.Log("Вы вышли из игры.");
     }
     #endregion
+    #region Loading
 
+    public void LoadLevel(string levelName)
+    {
+        string sceneName = GetScenePath(levelName);
+        if (sceneName != null)
+        {
+            SetCanvasState(false, false, false, false, true );
+            StartCoroutine(LoadSceneAsync(sceneName));
+        }
+        else
+        {
+            Debug.LogError($"Уровень с именем \"{levelName}\" не найден в сборке!");
+        }
+    }
+    private IEnumerator LoadSceneAsync(string sceneName)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        operation.allowSceneActivation = false;
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+
+            if (_loadingSlider != null)
+                _loadingSlider.value = progress;
+
+            if (_loadingSlider != null)
+                Debug.Log($"{progress * 100:0}%");
+
+            if (operation.progress >= 0.9f)
+            {
+                operation.allowSceneActivation = true;
+            }
+
+            yield return null;
+        }
+    }
+
+    private string GetScenePath(string levelName)
+    {
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string path = SceneUtility.GetScenePathByBuildIndex(i);
+            string sceneName = System.IO.Path.GetFileNameWithoutExtension(path);
+
+            if (sceneName.Equals(levelName, System.StringComparison.OrdinalIgnoreCase))
+            {
+                return path;
+            }
+        }
+        return null;
+    }
+    #endregion
     #region ChangeChapter
     public void NextChapterChange()
     {

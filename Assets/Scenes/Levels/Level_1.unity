@@ -1669,6 +1669,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1386661993178728552, guid: 8e3dfa3df2bc7ea439e4712da751437c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3582588514231916703, guid: 8e3dfa3df2bc7ea439e4712da751437c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1723,6 +1728,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UIManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403607981690239332, guid: 8e3dfa3df2bc7ea439e4712da751437c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9044207943844866297, guid: 8e3dfa3df2bc7ea439e4712da751437c,
         type: 3}
@@ -5235,11 +5245,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2030921903}
-    - target: {fileID: 6837815142488749693, guid: 417759710aecfda46a5c4478ed98732a,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7298959269515431639, guid: 417759710aecfda46a5c4478ed98732a,
         type: 3}
       propertyPath: m_Mesh

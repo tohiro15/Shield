@@ -1,13 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System.IO;
 public class FinishTrigger : MonoBehaviour
 {
+    private UIManager _uiManager;
+
+    private void Start()
+    {
+        _uiManager = FindObjectOfType<UIManager>();
+
+        if (_uiManager == null)
+        {
+            Debug.LogError("UIManager не найден в сцене!");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && _uiManager != null)
         {
             LoadNextScene();
         }
@@ -15,23 +25,28 @@ public class FinishTrigger : MonoBehaviour
 
     private void LoadNextScene()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-
-        if (currentScene == SceneManager.GetSceneByName("Development"))
+        var currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name == "Development")
         {
-            SceneManager.LoadScene(currentScene.path);
+            _uiManager.LoadSceneByName("Development");
         }
         else
         {
+
+
             int nextSceneIndex = currentScene.buildIndex + 1;
+
             if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
             {
-                SceneManager.LoadScene(nextSceneIndex);
+                string nextSceneName = SceneUtility.GetScenePathByBuildIndex(nextSceneIndex);
+                nextSceneName = Path.GetFileNameWithoutExtension(nextSceneName);
+
+                _uiManager.LoadSceneByName(nextSceneName);
             }
             else
             {
                 Debug.Log("Нет следующей сцены для загрузки!");
-                SceneManager.LoadScene(0);
+                _uiManager.LoadSceneByName("MainMenu");
             }
         }
     }
