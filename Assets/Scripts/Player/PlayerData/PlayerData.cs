@@ -46,7 +46,6 @@ public class PlayerData : ScriptableObject
         }
     }
 
-    // Метод для получения всех имен уровней из билд-сеттингов
     public string[] GetAllLevelNames()
     {
         List<string> levelNames = new List<string>();
@@ -58,7 +57,6 @@ public class PlayerData : ScriptableObject
         return levelNames.ToArray();
     }
 
-    // Получение индекса уровня по имени сцены
     public int GetLevelIndexByName(string levelName)
     {
         if (LevelIndexMap.ContainsKey(levelName))
@@ -66,10 +64,9 @@ public class PlayerData : ScriptableObject
             return LevelIndexMap[levelName];
         }
         Debug.LogWarning($"Level name '{levelName}' not found in index map!");
-        return -1; // Если уровень не найден
+        return -1;
     }
 
-    // Обновление данных уровня
     public void CoinPickUp(string levelName)
     {
         if (LevelsData.ContainsKey(levelName))
@@ -88,7 +85,6 @@ public class PlayerData : ScriptableObject
         }
     }
 
-    // Обновление данных уровня
     public void UpdateLevelData(string levelName, bool collectedAllCoins, bool failed)
     {
         if (LevelsData.ContainsKey(levelName))
@@ -110,8 +106,6 @@ public class PlayerData : ScriptableObject
             Debug.LogWarning($"Invalid level name: {levelName}");
         }
     }
-
-    // Получение данных уровня по имени
     public LevelData GetLevelDataByName(string levelName)
     {
         if (LevelsData.ContainsKey(levelName))
