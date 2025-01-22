@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.IO;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,17 +12,32 @@ public class UIManager : MonoBehaviour
     private bool _inputReady = false;
 
     [Header("UI Canvases")]
+    [Space]
+
     [SerializeField] private GameObject _startCanvas;
     [SerializeField] private GameObject _loadingCanvas;
     [SerializeField] private GameObject _HUDCanvas;
     [SerializeField] private GameObject _pauseCanvas;
 
     [Header("Loading UI")]
+    [Space]
+
     [SerializeField] private Slider _loadingSlider;
 
+    [Header("HUD")]
+    [Space]
+
+    [SerializeField] private TextMeshProUGUI _attemptsText;
+
     [Header("Zone Settings")]
+    [Space]
+
     [SerializeField] private RectTransform _checkZone;
 
+    [Header("Other")]
+    [Space]
+
+    [SerializeField] private PlayerData _playerData;
     private void Start()
     {
         InitializeGameState();
@@ -43,9 +59,11 @@ public class UIManager : MonoBehaviour
         _isGameStarting = true;
         _inputReady = false;
 
+        UpdateHUD();
+
         SetCanvasState(_startCanvas, true);
         SetCanvasState(_loadingCanvas, false);
-        SetCanvasState(_HUDCanvas, false);
+        SetCanvasState(_HUDCanvas, true);
         SetCanvasState(_pauseCanvas, false);
     }
 
@@ -78,7 +96,14 @@ public class UIManager : MonoBehaviour
         Debug.Log("Игра началась!");
     }
     #endregion
+    #region HUD
+    private void UpdateHUD()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
 
+        _attemptsText.text = $"{_playerData.LevelsData[currentScene.name].Attempts.ToString()} попытка";
+    }
+    #endregion
     #region Zone Check
     private bool IsCursorInZone()
     {
@@ -88,7 +113,6 @@ public class UIManager : MonoBehaviour
         return RectTransformUtility.RectangleContainsScreenPoint(_checkZone, cursorPosition);
     }
     #endregion
-
     #region Pause Menu
     public void OpenPauseMenu()
     {
@@ -113,7 +137,6 @@ public class UIManager : MonoBehaviour
         LoadSceneByName("MainMenu");
     }
     #endregion
-
     #region Loading Panel
     public void StartLoading()
     {
@@ -125,7 +148,6 @@ public class UIManager : MonoBehaviour
         SetCanvasState(_pauseCanvas, false);
     }
     #endregion
-
     #region Scene Management
     public void LoadSceneByName(string sceneName)
     {
@@ -178,7 +200,6 @@ public class UIManager : MonoBehaviour
         return false;
     }
     #endregion
-
     #region Utility
     private void SetCanvasState(GameObject canvas, bool isActive)
     {

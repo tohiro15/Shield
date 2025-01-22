@@ -13,7 +13,7 @@ public class PlayerData : ScriptableObject
         public int LevelIndex;
         public string LevelName;
         public int CoinsCollected;
-        public int FailedAttempts;
+        public int Attempts = 1;
     }
 
     public Dictionary<string, int> LevelIndexMap = new Dictionary<string, int>();
@@ -98,7 +98,7 @@ public class PlayerData : ScriptableObject
 
             if (failed)
             {
-                levelData.FailedAttempts++;
+                levelData.Attempts++;
             }
         }
         else

@@ -26,7 +26,7 @@ public class FinishTrigger : MonoBehaviour
 
             if (levelIndex != -1)
             {
-                _playerData.LevelsData[_currentScene.name].FailedAttempts = 0;
+                _playerData.LevelsData[_currentScene.name].Attempts = 0;
 
                 LoadNextScene();
             }
