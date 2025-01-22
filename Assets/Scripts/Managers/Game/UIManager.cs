@@ -101,7 +101,14 @@ public class UIManager : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
 
-        _attemptsText.text = $"{_playerData.LevelsData[currentScene.name].Attempts.ToString()} попытка";
+        if (currentScene.name == "Development")
+        {
+            _attemptsText.text = $"’уй тебе а не попытка";
+        }
+        else
+        {
+            _attemptsText.text = $"{_playerData.LevelsData[currentScene.name].Attempts.ToString()} попытка";
+        }
     }
     #endregion
     #region Zone Check
