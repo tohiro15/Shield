@@ -28,7 +28,7 @@ public class DeathTrigger : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
 
-        _playerData.UpdateLevelData(_playerData.GetLevelIndexByName(currentScene.name), true);
+        _playerData.UpdateLevelData(currentScene.name, false, true);
         SceneManager.LoadScene(currentScene.name);
     }
 }

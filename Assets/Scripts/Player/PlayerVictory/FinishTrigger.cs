@@ -22,36 +22,46 @@ public class FinishTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player") && _uiManager != null)
         {
-            _playerData.LevelsData[_playerData.GetLevelIndexByName(_currentScene.name)].FailedAttempts = 0;
-            LoadNextScene();
+            int levelIndex = _playerData.GetLevelIndexByName(_currentScene.name);
+
+            if (levelIndex != -1)
+            {
+                _playerData.LevelsData[_currentScene.name].FailedAttempts = 0;
+
+                LoadNextScene();
+            }
+            else
+            {
+                RestartCurrentScene();
+            }
         }
     }
+
 
     private void LoadNextScene()
     {
         var currentScene = SceneManager.GetActiveScene();
-        if (currentScene.name == "Development")
+        int nextSceneIndex = currentScene.buildIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
-            _uiManager.LoadSceneByName("Development");
+            string nextSceneName = SceneUtility.GetScenePathByBuildIndex(nextSceneIndex);
+            nextSceneName = Path.GetFileNameWithoutExtension(nextSceneName);
+
+            _uiManager.LoadSceneByName(nextSceneName);
         }
         else
         {
-
-
-            int nextSceneIndex = currentScene.buildIndex + 1;
-
-            if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-            {
-                string nextSceneName = SceneUtility.GetScenePathByBuildIndex(nextSceneIndex);
-                nextSceneName = Path.GetFileNameWithoutExtension(nextSceneName);
-
-                _uiManager.LoadSceneByName(nextSceneName);
-            }
-            else
-            {
-                Debug.Log("Нет следующей сцены для загрузки!");
-                _uiManager.LoadSceneByName("MainMenu");
-            }
+            Debug.Log("Нет следующей сцены для загрузки!");
+            _uiManager.LoadSceneByName("MainMenu");
         }
+    }
+
+    private void RestartCurrentScene()
+    {
+        var currentScene = SceneManager.GetActiveScene();
+        _uiManager.LoadSceneByName(currentScene.name);
+
+        Debug.Log("Эта сцена должна быть бесконечной!");
     }
 }

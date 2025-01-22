@@ -1,64 +1,124 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
+using System.IO;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObject/Player Data", order = 1)]
 public class PlayerData : ScriptableObject
 {
     [System.Serializable]
-    public class LevelData
+    public class LevelData : ScriptableObject
     {
-        public int CoinsCollected = 0;
-        public int FailedAttempts = 0;
+        public int LevelIndex;
+        public string LevelName;
+        public int CoinsCollected;
+        public int FailedAttempts;
     }
 
-    public LevelData[] LevelsData;
+    public Dictionary<string, int> LevelIndexMap = new Dictionary<string, int>();
+    public Dictionary<string, LevelData> LevelsData = new Dictionary<string, LevelData>();
 
-    public void InitializeData(int totalLevels)
+    private void OnEnable()
     {
-        LevelsData = new LevelData[totalLevels];
+        InitializeData();
     }
 
-    public void CoinPickUp(int levelIndex)
+    public void InitializeData()
     {
-        if (LevelsData[levelIndex].CoinsCollected < 3)
+        string[] levelNames = GetAllLevelNames();
+        for (int i = 0; i < levelNames.Length; i++)
         {
-            LevelsData[levelIndex].CoinsCollected++;
-            bool collectedAllCoins = LevelsData[levelIndex].CoinsCollected == 3;
-            UpdateLevelData(levelIndex, collectedAllCoins, false);
+            if (Regex.IsMatch(levelNames[i], @"^Level_\d+$"))
+            {
+                int levelIndex = int.Parse(levelNames[i].Replace("Level_", ""));
+
+                LevelIndexMap[levelNames[i]] = levelIndex;
+
+                LevelData levelData = ScriptableObject.CreateInstance<LevelData>();
+                levelData.LevelName = levelNames[i];
+                levelData.LevelIndex = levelIndex;
+
+                LevelsData[levelNames[i]] = levelData;
+
+            }
+            else LevelIndexMap["MainMenu"] = -1;
         }
     }
 
-    public void UpdateLevelData(int levelIndex, bool collectedAllCoins, bool failed)
+    // Метод для получения всех имен уровней из билд-сеттингов
+    public string[] GetAllLevelNames()
     {
-        if (collectedAllCoins)
+        List<string> levelNames = new List<string>();
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
         {
-            LevelsData[levelIndex].CoinsCollected = 3;
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            levelNames.Add(Path.GetFileNameWithoutExtension(scenePath));
         }
-
-        if (failed)
-        {
-            LevelsData[levelIndex].FailedAttempts++;
-        }
+        return levelNames.ToArray();
     }
 
-    public void UpdateLevelData(int levelIndex, bool failed)
-    {
-        if (failed)
-        {
-            LevelsData[levelIndex].FailedAttempts++;
-        }
-    }
-
+    // Получение индекса уровня по имени сцены
     public int GetLevelIndexByName(string levelName)
     {
-        string[] levelOrder = new string[] { "Level_1", "Level_2", "Level_3", "Level_4", "Level_5", "Level_6" };
-        for (int i = 0; i < levelOrder.Length; i++)
+        if (LevelIndexMap.ContainsKey(levelName))
         {
-            if (levelOrder[i] == levelName)
+            return LevelIndexMap[levelName];
+        }
+        Debug.LogWarning($"Level name '{levelName}' not found in index map!");
+        return -1; // Если уровень не найден
+    }
+
+    // Обновление данных уровня
+    public void CoinPickUp(string levelName)
+    {
+        if (LevelsData.ContainsKey(levelName))
+        {
+            LevelData levelData = LevelsData[levelName];
+            if (levelData.CoinsCollected < 3)
             {
-                return i;
+                levelData.CoinsCollected++;
+                bool collectedAllCoins = levelData.CoinsCollected == 3;
+                UpdateLevelData(levelName, collectedAllCoins, false);
             }
         }
+        else
+        {
+            Debug.LogWarning($"Invalid level name: {levelName}");
+        }
+    }
 
-        return -1;
+    // Обновление данных уровня
+    public void UpdateLevelData(string levelName, bool collectedAllCoins, bool failed)
+    {
+        if (LevelsData.ContainsKey(levelName))
+        {
+            LevelData levelData = LevelsData[levelName];
+
+            if (collectedAllCoins)
+            {
+                levelData.CoinsCollected = 3;
+            }
+
+            if (failed)
+            {
+                levelData.FailedAttempts++;
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Invalid level name: {levelName}");
+        }
+    }
+
+    // Получение данных уровня по имени
+    public LevelData GetLevelDataByName(string levelName)
+    {
+        if (LevelsData.ContainsKey(levelName))
+        {
+            return LevelsData[levelName];
+        }
+        Debug.LogWarning($"Level data not found for level: {levelName}");
+        return null;
     }
 }

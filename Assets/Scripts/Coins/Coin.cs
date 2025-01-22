@@ -18,7 +18,7 @@ public class Coin : MonoBehaviour
         {
             if (other.CompareTag(tag))
             {
-                _playerData.CoinPickUp(_playerData.GetLevelIndexByName(_currentScene.name));
+                _playerData.CoinPickUp(_currentScene.name);
                 Debug.Log("Монетка подобрана");
                 gameObject.SetActive(false);
             }

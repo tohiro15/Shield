@@ -80,8 +80,19 @@ public class MainMenuUIManager : MonoBehaviour
 
         for (int i = 0; i < _coinsCollected.Length; i++)
         {
-            _coinsCollected[i].text = $"{_playerData.LevelsData[i].CoinsCollected.ToString()} собрано";
+            string levelName = $"Level_{i + 1}";  // Формируем имя уровня на основе индекса
+
+            if (_playerData.LevelsData.ContainsKey(levelName))
+            {
+                _coinsCollected[i].text = $"{_playerData.LevelsData[levelName].CoinsCollected} собрано";
+            }
+            else
+            {
+                Debug.LogWarning($"Ключ для уровня '{levelName}' не найден в LevelsData!");
+                _coinsCollected[i].text = "Данные не найдены";
+            }
         }
+
 
         float savedVolume = SoundManager.Instance.GetMusicVolume();
         _volumeSlider.value = savedVolume;

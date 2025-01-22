@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class SoundManager : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class SoundManager : MonoBehaviour
     [Header("Audio Mixers")]
     [SerializeField] private AudioMixer _musicAudioMixer;
     [SerializeField] private AudioMixer _sfxAudioMixer;
+
     [Header("Music Clips")]
     [SerializeField] private AudioClip _mainMenuMusicClip;
     [SerializeField] private AudioClip _developmentMusicClip;
     [SerializeField] private AudioClip[] _levelMusicClips;
     [SerializeField] private AudioSource _musicAudioSource;
+
+    private Dictionary<string, AudioClip> _sceneMusicMap;
 
     private void Awake()
     {
@@ -27,46 +31,36 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        InitializeSceneMusicMap();
+
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void InitializeSceneMusicMap()
+    {
+        _sceneMusicMap = new Dictionary<string, AudioClip>
+        {
+            { "MainMenu", _mainMenuMusicClip },
+            { "Development", _developmentMusicClip }
+        };
+
+        for (int i = 0; i < _levelMusicClips.Length; i++)
+        {
+            _sceneMusicMap.Add($"Level_{i + 1}", _levelMusicClips[i]);
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         string sceneName = scene.name;
 
-        AudioClip newClip = GetMusicForScene(sceneName);
-        if (newClip != null)
+        if (_sceneMusicMap.TryGetValue(sceneName, out AudioClip newClip))
         {
             PlayMusic(newClip);
         }
         else
         {
             Debug.LogWarning($"Музыка для сцены {sceneName} не найдена!");
-        }
-    }
-
-    private AudioClip GetMusicForScene(string sceneName)
-    {
-        switch (sceneName)
-        {
-            case "MainMenu":
-                return _mainMenuMusicClip;
-            case "Development":
-                return _developmentMusicClip;
-            case "Level_1":
-                return _levelMusicClips[0];
-            case "Level_2":
-                return _levelMusicClips[1];
-            case "Level_3":
-                return _levelMusicClips[2];
-            case "Level_4":
-                return _levelMusicClips[3];
-            case "Level_5":
-                return _levelMusicClips[4];
-            case "Level_6":
-                return _levelMusicClips[5];
-            default:
-                return null;
         }
     }
 
@@ -77,9 +71,12 @@ public class SoundManager : MonoBehaviour
             _musicAudioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        _musicAudioSource.Stop();
-        _musicAudioSource.clip = clip;
-        _musicAudioSource.Play();
+        if (_musicAudioSource.clip != clip)
+        {
+            _musicAudioSource.Stop();
+            _musicAudioSource.clip = clip;
+            _musicAudioSource.Play();
+        }
     }
 
     public void SetMusicVolume(float volume)
@@ -94,16 +91,17 @@ public class SoundManager : MonoBehaviour
 
     public float GetMusicVolume()
     {
-        if (_musicAudioMixer.GetFloat("MusicVolume", out float value))
-        {
-            return value;
-        }
-        return 0f;
+        return GetVolume("MusicVolume");
     }
 
     public float GetSFXVolume()
     {
-        if (_sfxAudioMixer.GetFloat("SFXVolume", out float value))
+        return GetVolume("SFXVolume");
+    }
+
+    private float GetVolume(string parameterName)
+    {
+        if (_musicAudioMixer.GetFloat(parameterName, out float value))
         {
             return value;
         }
