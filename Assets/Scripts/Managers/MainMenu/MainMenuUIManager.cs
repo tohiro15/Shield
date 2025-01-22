@@ -23,6 +23,11 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentChapterText;
     private int _currentChapter = 1;
 
+    [Header ("Change Level")]
+    [Space]
+
+    [SerializeField] private TextMeshProUGUI[] _coinsCollected;
+
     [Header("Manual Menu")]
     [Space]
 
@@ -40,6 +45,12 @@ public class MainMenuUIManager : MonoBehaviour
     [Space]
 
     [SerializeField] private Slider _volumeSlider;
+
+    [Header("Other")]
+    [Space]
+
+    [SerializeField] private PlayerData _playerData;
+    
     public string volumeParameter = "MasterVolume";
 
     private void SetVolume(float value)
@@ -66,6 +77,11 @@ public class MainMenuUIManager : MonoBehaviour
 
         _pastChapterButton.gameObject.SetActive(false);
         _nextChapterButton.gameObject.SetActive(true);
+
+        for (int i = 0; i < _coinsCollected.Length; i++)
+        {
+            _coinsCollected[i].text = $"{_playerData.LevelsData[i].CoinsCollected.ToString()} собрано";
+        }
 
         float savedVolume = SoundManager.Instance.GetMusicVolume();
         _volumeSlider.value = savedVolume;

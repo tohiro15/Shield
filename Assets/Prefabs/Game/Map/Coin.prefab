@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5931494518791615377}
   - component: {fileID: 7868804508545704837}
   m_Layer: 0
-  m_Name: "\u0430"
+  m_Name: sheath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.729018, y: 0.080805324, z: 0.729018}
+  m_LocalScale: {x: 0.729018, y: 0.08080532, z: 0.729018}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5157742348771812708}
@@ -116,7 +116,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5157742348771812708}
+  - component: {fileID: 72616368361542185}
   - component: {fileID: 1494180282226974937}
+  - component: {fileID: 3772771453012310890}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -141,6 +143,23 @@ Transform:
   - {fileID: 302989833053041517}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &72616368361542185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975203863948904301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be242862d547b14ea3a4d2fd7f88224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _validTags:
+  - Player
+  - Shiled
+  - Box
+  _playerData: {fileID: 11400000, guid: e66b31afb1a5ab64b9db7081b87b61f0, type: 2}
 --- !u!136 &1494180282226974937
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -164,6 +183,27 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.049316645, z: -0.00000011920929}
+--- !u!95 &3772771453012310890
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975203863948904301}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 939095ce9e886b84b9f205748afea8b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6334527686355336841
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +217,7 @@ GameObject:
   - component: {fileID: 3135960733286273194}
   - component: {fileID: 2646873849037287509}
   m_Layer: 0
-  m_Name: "\u0430 (1)"
+  m_Name: center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

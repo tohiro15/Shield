@@ -210,6 +210,7 @@ MonoBehaviour:
   _validTags:
   - Player
   - Shield
+  _playerData: {fileID: 11400000, guid: e66b31afb1a5ab64b9db7081b87b61f0, type: 2}
 --- !u!114 &5305062000745722859
 MonoBehaviour:
   m_ObjectHideFlags: 0

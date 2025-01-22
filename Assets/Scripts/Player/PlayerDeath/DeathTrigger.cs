@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class DeathTrigger : MonoBehaviour
 {
     [SerializeField] private string[] _validTags;
-
+    [SerializeField] private PlayerData _playerData;
     private void OnTriggerEnter(Collider other)
     {
         if (_validTags.Length == 0)
@@ -18,16 +18,17 @@ public class DeathTrigger : MonoBehaviour
         {
             if (other.CompareTag(tag))
             {
-                ReloadScene();
+                Death();
                 return;
             }
         }
     }
 
-    private void ReloadScene()
+    private void Death()
     {
-        // Получаем текущую сцену и загружаем ее заново
         Scene currentScene = SceneManager.GetActiveScene();
+
+        _playerData.UpdateLevelData(_playerData.GetLevelIndexByName(currentScene.name), true);
         SceneManager.LoadScene(currentScene.name);
     }
 }
