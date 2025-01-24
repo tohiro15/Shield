@@ -60,6 +60,8 @@ public class MainMenuUIManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
+
         if (SoundManager.Instance == null)
         {
             Debug.LogError("SoundManager not found!");
@@ -168,8 +170,10 @@ public class MainMenuUIManager : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;
 
+
         while (!operation.isDone)
         {
+
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
 
             if (_loadingSlider != null)
@@ -185,6 +189,7 @@ public class MainMenuUIManager : MonoBehaviour
 
             yield return null;
         }
+        yield return new WaitForSecondsRealtime(0.5f);
     }
 
     private string GetScenePath(string levelName)

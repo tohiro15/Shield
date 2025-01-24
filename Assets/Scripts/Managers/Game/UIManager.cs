@@ -191,6 +191,7 @@ public class UIManager : MonoBehaviour
 
             yield return null;
         }
+        yield return new WaitForSecondsRealtime(0.5f);
     }
 
     private bool SceneExists(string sceneName)
