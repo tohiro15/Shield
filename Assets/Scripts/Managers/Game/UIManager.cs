@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject _startCanvas;
     [SerializeField] private GameObject _loadingCanvas;
-    [SerializeField] private GameObject _HUDCanvas;
+    [SerializeField] private GameObject _gameCanvas;
     [SerializeField] private GameObject _pauseCanvas;
 
     [Header("Loading UI")]
@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
 
         SetCanvasState(_startCanvas, true);
         SetCanvasState(_loadingCanvas, false);
-        SetCanvasState(_HUDCanvas, true);
+        SetCanvasState(_gameCanvas, false);
         SetCanvasState(_pauseCanvas, false);
     }
 
@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
         SetCanvasState(_startCanvas, false);
         SetCanvasState(_loadingCanvas, false);
-        SetCanvasState(_HUDCanvas, true);
+        SetCanvasState(_gameCanvas, true);
         SetCanvasState(_pauseCanvas, false);
 
         Debug.Log("Игра началась!");
@@ -126,7 +126,7 @@ public class UIManager : MonoBehaviour
         if (Time.timeScale == 0) return;
 
         Time.timeScale = 0;
-        SetCanvasState(_HUDCanvas, false);
+        SetCanvasState(_gameCanvas, false);
         SetCanvasState(_pauseCanvas, true);
     }
 
@@ -136,7 +136,7 @@ public class UIManager : MonoBehaviour
 
         Time.timeScale = 1;
         SetCanvasState(_pauseCanvas, false);
-        SetCanvasState(_HUDCanvas, true);
+        SetCanvasState(_gameCanvas, true);
     }
 
     public void ReturnToMainMenu()
@@ -151,7 +151,7 @@ public class UIManager : MonoBehaviour
 
         SetCanvasState(_loadingCanvas, true);
         SetCanvasState(_startCanvas, false);
-        SetCanvasState(_HUDCanvas, false);
+        SetCanvasState(_gameCanvas, false);
         SetCanvasState(_pauseCanvas, false);
     }
     #endregion

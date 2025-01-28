@@ -2271,7 +2271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startCanvas: {fileID: 4901309074275024920}
   _loadingCanvas: {fileID: 4252461035622029397}
-  _HUDCanvas: {fileID: 8440567768158896412}
+  _gameCanvas: {fileID: 8440567768158896412}
   _pauseCanvas: {fileID: 5954849241774807681}
   _loadingSlider: {fileID: 4643827591011993516}
   _attemptsText: {fileID: 5645752360560203443}
