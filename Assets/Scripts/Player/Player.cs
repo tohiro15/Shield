@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     [Space]
 
     [SerializeField] private Transform _shieldTransform;
+    [SerializeField] private Material _shieldMaterial;
+    [SerializeField] private Color _attackColor;
     [SerializeField] private float _distanceFromPlayer;
     [SerializeField] private float _shieldRotateSpeed;
 
@@ -62,7 +64,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _fireController.Initialize(_bulletPrefab, _bulletSpawnTransform, _validTags, _bulletSpeed);
+            _fireController.Initialize(_bulletPrefab, _shieldMaterial, _bulletSpawnTransform, _attackColor, _validTags, _bulletSpeed);
         }
     }
 
