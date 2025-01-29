@@ -46,7 +46,6 @@ public class PlayerData : ScriptableObject
             }
             else
             {
-                // Default handling for MainMenu
                 LevelIndexMap["MainMenu"] = -1;
             }
         }

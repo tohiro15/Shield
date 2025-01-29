@@ -24,15 +24,16 @@ public class FinishTrigger : MonoBehaviour
         {
             int levelIndex = _playerData.GetLevelIndexByName(_currentScene.name);
 
-            if (levelIndex != -1)
+            if (levelIndex == 0)
+            {
+                _playerData.LevelsData[_currentScene.name].CurrentCheckpoint = 0;
+                RestartCurrentScene();
+            }
+            else if (levelIndex != -1)
             {
                 _playerData.LevelsData[_currentScene.name].Attempts = 0;
                 _playerData.LevelsData[_currentScene.name].CurrentCheckpoint = 0;
                 LoadNextScene();
-            }
-            else
-            {
-                RestartCurrentScene();
             }
         }
     }

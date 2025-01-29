@@ -46,7 +46,8 @@ public class Player : MonoBehaviour
 
         if (_shieldRenderer == null && _notShield == false)
         {
-            Debug.LogError("Shield Renderer не найден!");
+            Debug.LogError("Shield Renderer не найден!  омпонент будет инициализирован автоматически!");
+            _shieldRenderer = _shieldTransform.gameObject.GetComponent<Renderer>();
         }
 
         if (_defaultShieldMaterial == null && _notShield == false)

@@ -41,7 +41,7 @@ public class SoundManager : MonoBehaviour
         _sceneMusicMap = new Dictionary<string, AudioClip>
         {
             { "MainMenu", _mainMenuMusicClip },
-            { "Development", _developmentMusicClip }
+            { "Level_0", _developmentMusicClip }
         };
 
         for (int i = 0; i < _levelMusicClips.Length; i++)
