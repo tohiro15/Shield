@@ -2899,6 +2899,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1446609572}
+    - target: {fileID: 861277237653017436, guid: c3d19c71bfee3af4b9784a869897852d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4093073346330246033, guid: c3d19c71bfee3af4b9784a869897852d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0cdb65b8f02e2c445a307de675cd8ae6, type: 2}
     - target: {fileID: 5238023396727574869, guid: c3d19c71bfee3af4b9784a869897852d,
         type: 3}
       propertyPath: m_Mesh
@@ -2908,6 +2918,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5642376941786173211, guid: c3d19c71bfee3af4b9784a869897852d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0cdb65b8f02e2c445a307de675cd8ae6, type: 2}
+    - target: {fileID: 6123079744412715851, guid: c3d19c71bfee3af4b9784a869897852d,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4735258
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123079744412715851, guid: c3d19c71bfee3af4b9784a869897852d,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.6791377
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123079744412715851, guid: c3d19c71bfee3af4b9784a869897852d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4735258
       objectReference: {fileID: 0}
     - target: {fileID: 6195360113527269577, guid: c3d19c71bfee3af4b9784a869897852d,
         type: 3}
@@ -3068,6 +3098,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983947212284568737, guid: c3d19c71bfee3af4b9784a869897852d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.7372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983947212284568737, guid: c3d19c71bfee3af4b9784a869897852d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.6509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983947212284568737, guid: c3d19c71bfee3af4b9784a869897852d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.44705886
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
