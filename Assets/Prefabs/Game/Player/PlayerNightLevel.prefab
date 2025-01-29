@@ -533,8 +533,11 @@ MonoBehaviour:
   _movementSpeed: 5
   _evadeSpeed: 7
   _shieldTransform: {fileID: 7639487615118656139}
-  _shieldMaterial: {fileID: 0}
-  _attackColor: {r: 0.12941177, g: 0.4627451, b: 0.64705884, a: 0.6862745}
+  _shieldRenderer: {fileID: 2622296864126640687}
+  _defaultShieldMaterial: {fileID: 2100000, guid: 370385097cc3a614a8d7b8b118a19685,
+    type: 2}
+  _attackShieldMaterial: {fileID: 2100000, guid: efb0657255c8da74ab9c59000a308312,
+    type: 2}
   _distanceFromPlayer: 1.5
   _shieldRotateSpeed: 110
   _bulletPrefab: {fileID: 6336558582189037822, guid: 80179ac14a9735f4bb7a3dfee37734e6,
@@ -1227,7 +1230,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: efb0657255c8da74ab9c59000a308312, type: 2}
+  - {fileID: 2100000, guid: 370385097cc3a614a8d7b8b118a19685, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

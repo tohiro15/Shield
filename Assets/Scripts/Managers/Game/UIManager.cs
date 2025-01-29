@@ -103,7 +103,7 @@ public class UIManager : MonoBehaviour
 
         if (currentScene.name == "Development")
         {
-            _attemptsText.text = $"’уй тебе а не попытка";
+            _attemptsText.text = $"‘иг тебе а не попытка";
         }
         else
         {
@@ -141,6 +141,9 @@ public class UIManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        _playerData.LevelsData[currentSceneName].CurrentCheckpoint = 0;
         LoadSceneByName("MainMenu");
     }
     #endregion

@@ -13,9 +13,11 @@ public class Player : MonoBehaviour
     [Header("Shield Settings")]
     [Space]
 
+    [SerializeField] private bool _notShield;
     [SerializeField] private Transform _shieldTransform;
-    [SerializeField] private Material _shieldMaterial;
-    [SerializeField] private Color _attackColor;
+    [SerializeField] private Renderer _shieldRenderer;
+    [SerializeField] private Material _defaultShieldMaterial;
+    [SerializeField] private Material _attackShieldMaterial;
     [SerializeField] private float _distanceFromPlayer;
     [SerializeField] private float _shieldRotateSpeed;
 
@@ -35,6 +37,28 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+
+        if (_notShield)
+        {
+            Debug.Log("Щит выключен!");
+            _shieldTransform.gameObject.SetActive(false);
+        }
+
+        if (_shieldRenderer == null && _notShield == false)
+        {
+            Debug.LogError("Shield Renderer не найден!");
+        }
+
+        if (_defaultShieldMaterial == null && _notShield == false)
+        {
+            Debug.LogError("Default Shield Material не найден!");
+        }
+
+        if (_attackShieldMaterial == null && _notShield == false)
+        {
+            Debug.LogError("Attack Shield Material не найден!");
+        }
+
         if (_rigidbody == null)
         {
             Debug.LogError("Rigidbody не найден! Компонент будет добавлен автоматически.");
@@ -48,7 +72,7 @@ public class Player : MonoBehaviour
         }
 
         _shieldController = GetComponent<ShieldController>();
-        if (_shieldController == null)
+        if (_shieldController == null && _notShield == false)
         {
             Debug.LogError("ShieldController не найден!");
         }
@@ -58,13 +82,13 @@ public class Player : MonoBehaviour
         }
 
         _fireController = GetComponent<FireController>();
-        if (_fireController == null)
+        if (_fireController == null && _notShield == false)
         {
             Debug.LogError("FireController не найден!");
         }
-        else
+        else if(_notShield == false)
         {
-            _fireController.Initialize(_bulletPrefab, _shieldMaterial, _bulletSpawnTransform, _attackColor, _validTags, _bulletSpeed);
+            _fireController.Initialize(_shieldRenderer, _bulletPrefab, _defaultShieldMaterial, _attackShieldMaterial, _bulletSpawnTransform, _validTags, _bulletSpeed);
         }
     }
 

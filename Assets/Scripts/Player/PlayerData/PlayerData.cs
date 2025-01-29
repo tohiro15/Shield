@@ -13,6 +13,7 @@ public class PlayerData : ScriptableObject
         public int LevelIndex;
         public string LevelName;
         public int CoinsCollected;
+        public int CurrentCheckpoint;
         public int Attempts = 1;
     }
 
@@ -27,26 +28,31 @@ public class PlayerData : ScriptableObject
     public void InitializeData()
     {
         string[] levelNames = GetAllLevelNames();
-        for (int i = 0; i < levelNames.Length; i++)
+        foreach (var levelName in levelNames)
         {
-            if (Regex.IsMatch(levelNames[i], @"^Level_\d+$"))
+            if (IsValidLevelName(levelName))
             {
-                int levelIndex = int.Parse(levelNames[i].Replace("Level_", ""));
+                int levelIndex = ExtractLevelIndex(levelName);
 
-                LevelIndexMap[levelNames[i]] = levelIndex;
+                LevelIndexMap[levelName] = levelIndex;
 
-                LevelData levelData = ScriptableObject.CreateInstance<LevelData>();
-                levelData.LevelName = levelNames[i];
+                LevelData levelData = CreateInstance<LevelData>();
+                levelData.LevelName = levelName;
                 levelData.LevelIndex = levelIndex;
+                levelData.CurrentCheckpoint = 0;
+                levelData.Attempts = 0;
 
-                LevelsData[levelNames[i]] = levelData;
-
+                LevelsData[levelName] = levelData;
             }
-            else LevelIndexMap["MainMenu"] = -1;
+            else
+            {
+                // Default handling for MainMenu
+                LevelIndexMap["MainMenu"] = -1;
+            }
         }
     }
 
-    public string[] GetAllLevelNames()
+    private string[] GetAllLevelNames()
     {
         List<string> levelNames = new List<string>();
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
@@ -57,11 +63,21 @@ public class PlayerData : ScriptableObject
         return levelNames.ToArray();
     }
 
+    private bool IsValidLevelName(string levelName)
+    {
+        return Regex.IsMatch(levelName, @"^Level_\d+$");
+    }
+
+    private int ExtractLevelIndex(string levelName)
+    {
+        return int.Parse(levelName.Replace("Level_", ""));
+    }
+
     public int GetLevelIndexByName(string levelName)
     {
-        if (LevelIndexMap.ContainsKey(levelName))
+        if (LevelIndexMap.TryGetValue(levelName, out int levelIndex))
         {
-            return LevelIndexMap[levelName];
+            return levelIndex;
         }
         Debug.LogWarning($"Level name '{levelName}' not found in index map!");
         return -1;
@@ -69,14 +85,13 @@ public class PlayerData : ScriptableObject
 
     public void CoinPickUp(string levelName)
     {
-        if (LevelsData.ContainsKey(levelName))
+        if (TryGetLevelData(levelName, out var levelData))
         {
-            LevelData levelData = LevelsData[levelName];
             if (levelData.CoinsCollected < 3)
             {
                 levelData.CoinsCollected++;
                 bool collectedAllCoins = levelData.CoinsCollected == 3;
-                UpdateLevelData(levelName, collectedAllCoins, false);
+                UpdateLevelData(levelName, collectedAllCoins, false, false);
             }
         }
         else
@@ -85,12 +100,10 @@ public class PlayerData : ScriptableObject
         }
     }
 
-    public void UpdateLevelData(string levelName, bool collectedAllCoins, bool failed)
+    public void UpdateLevelData(string levelName, bool collectedAllCoins, bool failed, bool checkpointAdd)
     {
-        if (LevelsData.ContainsKey(levelName))
+        if (TryGetLevelData(levelName, out var levelData))
         {
-            LevelData levelData = LevelsData[levelName];
-
             if (collectedAllCoins)
             {
                 levelData.CoinsCollected = 3;
@@ -100,19 +113,44 @@ public class PlayerData : ScriptableObject
             {
                 levelData.Attempts++;
             }
+
+            if (checkpointAdd)
+            {
+                levelData.CurrentCheckpoint++;
+            }
         }
         else
         {
             Debug.LogWarning($"Invalid level name: {levelName}");
         }
     }
+
+    public bool TryGetLevelData(string levelName, out LevelData levelData)
+    {
+        return LevelsData.TryGetValue(levelName, out levelData);
+    }
+
     public LevelData GetLevelDataByName(string levelName)
     {
-        if (LevelsData.ContainsKey(levelName))
+        if (TryGetLevelData(levelName, out var levelData))
         {
-            return LevelsData[levelName];
+            return levelData;
         }
         Debug.LogWarning($"Level data not found for level: {levelName}");
         return null;
+    }
+
+    public void ResetLevelData(string levelName)
+    {
+        if (TryGetLevelData(levelName, out var levelData))
+        {
+            levelData.CoinsCollected = 0;
+            levelData.CurrentCheckpoint = 0;
+            levelData.Attempts = 0;
+        }
+        else
+        {
+            Debug.LogWarning($"Invalid level name: {levelName}");
+        }
     }
 }

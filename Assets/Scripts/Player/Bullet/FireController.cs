@@ -3,27 +3,29 @@ using UnityEngine;
 public class FireController : MonoBehaviour
 {
     private GameObject _bulletPrefab;
-    private Material _shieldMaterial;
+    private Material _defaultShieldMaterial;
+    private Material _atttackShieldMaterial;
     private Transform _bulletSpawn;
 
-    private Color _defaultColor;
-    private Color _attackColor;
+    private Renderer _shieldMaterials;
 
     private string[] _validTags;
     private float _bulletSpeed;
 
     private bool _canFire = false;
 
-    public void Initialize(GameObject playerBulletPrefab, Material shieldMaterial, Transform bulletSpawnTransform, Color attackColor, string[] validTags, float bulletSpeed)
+    public void Initialize(Renderer shieldRenderer, GameObject playerBulletPrefab, Material defaultShieldMaterial, Material attackShieldMaterial, Transform bulletSpawnTransform,string[] validTags, float bulletSpeed)
     {
+        _shieldMaterials = shieldRenderer;
+
         _bulletPrefab = playerBulletPrefab;
-        _shieldMaterial = shieldMaterial;
+
+        _defaultShieldMaterial = defaultShieldMaterial;
+        _shieldMaterials.material = _defaultShieldMaterial;
+
+        _atttackShieldMaterial = attackShieldMaterial;
 
         _bulletSpawn = bulletSpawnTransform;
-
-        _defaultColor = shieldMaterial.color;
-
-        _attackColor = attackColor;
 
         _bulletSpeed = bulletSpeed;
 
@@ -50,14 +52,14 @@ public class FireController : MonoBehaviour
             bulletScript.Initialize(_validTags, _bulletSpeed);
         }
 
-        _shieldMaterial.color = _defaultColor;
+        _shieldMaterials.material = _defaultShieldMaterial;
 
         _canFire = false;
     }
     public void LoadBullet()
     {
         Debug.Log("Пуля словлена!");
-        _shieldMaterial.color = _attackColor;
+        _shieldMaterials.material = _atttackShieldMaterial;
         _canFire = true;
     }
 
