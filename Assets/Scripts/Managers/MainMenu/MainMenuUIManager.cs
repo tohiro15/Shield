@@ -44,7 +44,8 @@ public class MainMenuUIManager : MonoBehaviour
     [Header("Options")]
     [Space]
 
-    [SerializeField] private Slider _volumeSlider;
+    [SerializeField] private Slider _musicSlider;
+    [SerializeField] private Slider _sfxSlider;
 
     [Header("Other")]
     [Space]
@@ -53,9 +54,13 @@ public class MainMenuUIManager : MonoBehaviour
     
     public string volumeParameter = "MasterVolume";
 
-    private void SetVolume(float value)
+    private void SetMusicVolume(float value)
     {
         SoundManager.Instance.SetMusicVolume(value);
+    }
+    private void SetSFXVolume(float value)
+    {
+        SoundManager.Instance.SetSFXVolume(value);
     }
 
     private void Start()
@@ -82,7 +87,7 @@ public class MainMenuUIManager : MonoBehaviour
 
         for (int i = 0; i < _coinsCollected.Length; i++)
         {
-            string levelName = $"Level_{i + 1}";  // Формируем имя уровня на основе индекса
+            string levelName = $"Level_{i + 1}"; 
 
             if (_playerData.LevelsData.ContainsKey(levelName))
             {
@@ -95,11 +100,14 @@ public class MainMenuUIManager : MonoBehaviour
             }
         }
 
+        float savedMusicVolume = SoundManager.Instance.GetMusicVolume();
+        _musicSlider.value = savedMusicVolume;
 
-        float savedVolume = SoundManager.Instance.GetMusicVolume();
-        _volumeSlider.value = savedVolume;
+        float savedSFXVolume = SoundManager.Instance.GetSFXVolume();
+        _sfxSlider.value = savedSFXVolume;
 
-        _volumeSlider.onValueChanged.AddListener(SetVolume);
+        _musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        _sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     private void SetCanvasState(bool mainMenu, bool options, bool manual, bool levelSelection, bool loading = false)

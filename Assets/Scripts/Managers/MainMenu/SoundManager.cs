@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using System.Collections;
 using System.Collections.Generic;
 
 public class SoundManager : MonoBehaviour
@@ -17,6 +18,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] _levelMusicClips;
     [SerializeField] private AudioSource _musicAudioSource;
 
+    [Header("Effect Clips")]
+    [SerializeField] private AudioClip _coinPickupClip;
+    [SerializeField] private AudioSource _sfxAudioSource;
+
     private Dictionary<string, AudioClip> _sceneMusicMap;
 
     private void Awake()
@@ -32,21 +37,25 @@ public class SoundManager : MonoBehaviour
         }
 
         InitializeSceneMusicMap();
-
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    #region Music
     private void InitializeSceneMusicMap()
     {
-        _sceneMusicMap = new Dictionary<string, AudioClip>
-        {
-            { "MainMenu", _mainMenuMusicClip },
-            { "Level_0", _developmentMusicClip }
-        };
+        _sceneMusicMap = new Dictionary<string, AudioClip>(System.StringComparer.OrdinalIgnoreCase);
 
+        // Add default mappings
+        if (_mainMenuMusicClip != null) _sceneMusicMap["MainMenu"] = _mainMenuMusicClip;
+        if (_developmentMusicClip != null) _sceneMusicMap["Level_0"] = _developmentMusicClip;
+
+        // Add level-specific mappings
         for (int i = 0; i < _levelMusicClips.Length; i++)
         {
-            _sceneMusicMap.Add($"Level_{i + 1}", _levelMusicClips[i]);
+            if (_levelMusicClips[i] != null)
+            {
+                _sceneMusicMap[$"Level_{i + 1}"] = _levelMusicClips[i];
+            }
         }
     }
 
@@ -73,7 +82,6 @@ public class SoundManager : MonoBehaviour
 
         if (_musicAudioSource.clip != clip)
         {
-            _musicAudioSource.Stop();
             _musicAudioSource.clip = clip;
             _musicAudioSource.Play();
         }
@@ -81,27 +89,29 @@ public class SoundManager : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
+        volume = Mathf.Clamp(volume, -80f, 0f);
         _musicAudioMixer.SetFloat("MusicVolume", volume);
     }
 
     public void SetSFXVolume(float volume)
     {
+        volume = Mathf.Clamp(volume, -80f, 0f);
         _sfxAudioMixer.SetFloat("SFXVolume", volume);
     }
 
     public float GetMusicVolume()
     {
-        return GetVolume("MusicVolume");
+        return GetVolume("MusicVolume", _musicAudioMixer);
     }
 
     public float GetSFXVolume()
     {
-        return GetVolume("SFXVolume");
+        return GetVolume("SFXVolume", _sfxAudioMixer);
     }
 
-    private float GetVolume(string parameterName)
+    private float GetVolume(string parameterName, AudioMixer mixer)
     {
-        if (_musicAudioMixer.GetFloat(parameterName, out float value))
+        if (mixer.GetFloat(parameterName, out float value))
         {
             return value;
         }
@@ -112,4 +122,19 @@ public class SoundManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+    #endregion
+
+    #region Effects
+    public void CoinPickupSoundPlay()
+    {
+        if (_sfxAudioSource != null)
+        {
+            _sfxAudioSource.PlayOneShot(_coinPickupClip);
+        }
+        else
+        {
+            Debug.LogWarning("SFX AudioSource is not assigned!");
+        }
+    }
+    #endregion
 }
