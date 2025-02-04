@@ -23,10 +23,10 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentChapterText;
     private int _currentChapter = 1;
 
-    [Header ("Change Level")]
+    [Header("Change Level")]
     [Space]
 
-    [SerializeField] private TextMeshProUGUI[] _coinsCollected;
+    [SerializeField] private LevelButton[] _levelButtons;
 
     [Header("Manual Menu")]
     [Space]
@@ -85,19 +85,24 @@ public class MainMenuUIManager : MonoBehaviour
         _pastChapterButton.gameObject.SetActive(false);
         _nextChapterButton.gameObject.SetActive(true);
 
-        for (int i = 0; i < _coinsCollected.Length; i++)
+        for (int i = 0; i < _levelButtons.Length; i++)
         {
-            string levelName = $"Level_{i + 1}"; 
+            string levelName = $"Level_{i + 1}";
 
             if (_playerData.LevelsData.ContainsKey(levelName))
             {
-                _coinsCollected[i].text = $"{_playerData.LevelsData[levelName].CoinsCollected} собрано";
+                int coinsCollected = _playerData.LevelsData[levelName].CoinsCollected;
+
+                _levelButtons[i].UpdateCoinStatus(coinsCollected);
             }
             else
             {
-                Debug.LogWarning($"Ключ для уровня '{levelName}' не найден в LevelsData!");
-                _coinsCollected[i].text = "Данные не найдены";
+                Debug.LogWarning($"Ключ для уровня '{levelName}' не найден!");
+                _levelButtons[i].UpdateCoinStatus(0);
             }
+
+            int levelIndex = i; 
+            _levelButtons[i].GetComponent<Button>().onClick.AddListener(() => LoadLevel(levelName));
         }
 
         float savedMusicVolume = SoundManager.Instance.GetMusicVolume();

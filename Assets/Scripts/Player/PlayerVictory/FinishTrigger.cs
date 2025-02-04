@@ -33,6 +33,7 @@ public class FinishTrigger : MonoBehaviour
             {
                 _playerData.LevelsData[_currentScene.name].Attempts = 0;
                 _playerData.LevelsData[_currentScene.name].CurrentCheckpoint = 0;
+                _playerData.LevelsData[_currentScene.name].IsDone = true;
                 LoadNextScene();
             }
         }

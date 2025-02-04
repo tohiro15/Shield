@@ -10,6 +10,7 @@ public class PlayerData : ScriptableObject
     [System.Serializable]
     public class LevelData : ScriptableObject
     {
+        public bool IsDone;
         public int LevelIndex;
         public string LevelName;
         public int CoinsCollected;

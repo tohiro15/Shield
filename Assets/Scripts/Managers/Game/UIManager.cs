@@ -17,8 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _startCanvas;
     [SerializeField] private GameObject _loadingCanvas;
     [SerializeField] private GameObject _gameCanvas;
-    [SerializeField] private GameObject _pauseCanvas;
     [SerializeField] private GameObject _permamentCanvas;
+    [SerializeField] private GameObject _pauseCanvas;
 
     [Header("Loading UI")]
     [Space]
@@ -63,10 +63,10 @@ public class UIManager : MonoBehaviour
         UpdateHUD();
 
         SetCanvasState(_startCanvas, true);
+        SetCanvasState(_permamentCanvas, true);
         SetCanvasState(_loadingCanvas, false);
         SetCanvasState(_gameCanvas, false);
         SetCanvasState(_pauseCanvas, false);
-        SetCanvasState(_permamentCanvas, true);
     }
 
     private IEnumerator WaitForAllKeysToRelease()
@@ -94,7 +94,6 @@ public class UIManager : MonoBehaviour
         SetCanvasState(_loadingCanvas, false);
         SetCanvasState(_gameCanvas, true);
         SetCanvasState(_pauseCanvas, false);
-        SetCanvasState(_permamentCanvas, true);
 
         Debug.Log("Игра началась!");
     }

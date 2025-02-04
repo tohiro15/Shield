@@ -1474,7 +1474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3867698644666248866
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2375,8 +2375,8 @@ MonoBehaviour:
   _startCanvas: {fileID: 4901309074275024920}
   _loadingCanvas: {fileID: 4252461035622029397}
   _gameCanvas: {fileID: 8440567768158896412}
-  _pauseCanvas: {fileID: 5954849241774807681}
   _permamentCanvas: {fileID: 3937512130580264075}
+  _pauseCanvas: {fileID: 5954849241774807681}
   _loadingSlider: {fileID: 4643827591011993516}
   _attemptsText: {fileID: 5645752360560203443}
   _checkZone: {fileID: 5515449616450063204}
