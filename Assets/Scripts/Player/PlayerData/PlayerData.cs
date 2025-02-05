@@ -13,6 +13,7 @@ public class PlayerData : ScriptableObject
         public bool IsDone;
         public int LevelIndex;
         public string LevelName;
+        public int CurrentCoinsCollected;
         public int CoinsCollected;
         public int CurrentCheckpoint;
         public int Attempts = 1;
@@ -89,7 +90,13 @@ public class PlayerData : ScriptableObject
         {
             if (levelData.CoinsCollected < 3)
             {
-                levelData.CoinsCollected++;
+                levelData.CurrentCoinsCollected++;
+
+                if (levelData.CoinsCollected < levelData.CurrentCoinsCollected)
+                {
+                    levelData.CoinsCollected = levelData.CurrentCoinsCollected;
+                }
+
                 bool collectedAllCoins = levelData.CoinsCollected == 3;
                 UpdateLevelData(levelName, collectedAllCoins, false, false);
             }

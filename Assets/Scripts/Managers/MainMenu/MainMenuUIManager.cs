@@ -40,6 +40,7 @@ public class MainMenuUIManager : MonoBehaviour
 
     [SerializeField] private GameObject _loadingCanvas;
     [SerializeField] private Slider _loadingSlider;
+    private bool isLoading = false;
 
     [Header("Options")]
     [Space]
@@ -49,7 +50,6 @@ public class MainMenuUIManager : MonoBehaviour
 
     [Header("Other")]
     [Space]
-
     [SerializeField] private PlayerData _playerData;
     
     public string volumeParameter = "MasterVolume";
@@ -93,12 +93,12 @@ public class MainMenuUIManager : MonoBehaviour
             {
                 int coinsCollected = _playerData.LevelsData[levelName].CoinsCollected;
 
-                _levelButtons[i].UpdateCoinStatus(coinsCollected);
+                _levelButtons[i].UpdateCoinStatus(coinsCollected, levelName);
             }
             else
             {
                 Debug.LogWarning($"Ключ для уровня '{levelName}' не найден!");
-                _levelButtons[i].UpdateCoinStatus(0);
+                _levelButtons[i].UpdateCoinStatus(0, levelName);
             }
 
             int levelIndex = i; 
@@ -167,10 +167,14 @@ public class MainMenuUIManager : MonoBehaviour
 
     public void LoadLevel(string levelName)
     {
+        if (isLoading) return; // Если уже идёт загрузка, просто выходим.
+
+        isLoading = true;
+
         string sceneName = GetScenePath(levelName);
         if (sceneName != null)
         {
-            SetCanvasState(false, false, false, false, true );
+            SetCanvasState(false, false, false, false, true);
             StartCoroutine(LoadSceneAsync(sceneName));
         }
         else
@@ -178,22 +182,19 @@ public class MainMenuUIManager : MonoBehaviour
             Debug.LogError($"Уровень с именем \"{levelName}\" не найден в сборке!");
         }
     }
+
     private IEnumerator LoadSceneAsync(string sceneName)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;
 
-
         while (!operation.isDone)
         {
-
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
-
             if (_loadingSlider != null)
+            {
                 _loadingSlider.value = progress;
-
-            if (_loadingSlider != null)
-                Debug.Log($"{progress * 100:0}%");
+            }
 
             if (operation.progress >= 0.9f)
             {
@@ -202,8 +203,11 @@ public class MainMenuUIManager : MonoBehaviour
 
             yield return null;
         }
-        yield return new WaitForSecondsRealtime(0.5f);
+
+        isLoading = false; // Загрузка завершена
     }
+
+
 
     private string GetScenePath(string levelName)
     {

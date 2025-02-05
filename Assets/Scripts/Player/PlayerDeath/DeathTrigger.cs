@@ -28,6 +28,8 @@ public class DeathTrigger : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
 
+        _playerData.LevelsData[currentScene.name].CurrentCoinsCollected = 0;
+
         _playerData.UpdateLevelData(currentScene.name, false, true, false);
         SceneManager.LoadScene(currentScene.name);
     }

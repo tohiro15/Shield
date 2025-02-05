@@ -32,6 +32,7 @@ public class FinishTrigger : MonoBehaviour
             else if (levelIndex != -1)
             {
                 _playerData.LevelsData[_currentScene.name].Attempts = 0;
+                _playerData.LevelsData[_currentScene.name].CurrentCoinsCollected = 0;
                 _playerData.LevelsData[_currentScene.name].CurrentCheckpoint = 0;
                 _playerData.LevelsData[_currentScene.name].IsDone = true;
                 LoadNextScene();

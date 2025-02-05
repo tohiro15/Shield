@@ -38,6 +38,7 @@ public class StickyText : MonoBehaviour
     {
         if (other.CompareTag("TextDelay"))
         {
+            Debug.Log("Текст пойман.");
             StartCoroutine(TextDelayOnPoint(other.transform));
         }
     }

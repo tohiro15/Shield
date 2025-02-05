@@ -3,42 +3,30 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
 using System.IO;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    private bool _isGameStarting = true;
-    private bool _inputReady = false;
-
     [Header("UI Canvases")]
-    [Space]
-
-    [SerializeField] private GameObject _startCanvas;
-    [SerializeField] private GameObject _loadingCanvas;
-    [SerializeField] private GameObject _gameCanvas;
-    [SerializeField] private GameObject _permamentCanvas;
-    [SerializeField] private GameObject _pauseCanvas;
+    [SerializeField] private CanvasManager _canvasManager;
 
     [Header("Loading UI")]
-    [Space]
-
     [SerializeField] private Slider _loadingSlider;
 
     [Header("HUD")]
-    [Space]
-
     [SerializeField] private TextMeshProUGUI _attemptsText;
 
     [Header("Zone Settings")]
-    [Space]
-
     [SerializeField] private RectTransform _checkZone;
 
     [Header("Other")]
-    [Space]
-
     [SerializeField] private PlayerData _playerData;
+
+    private bool isGameStarting = true;
+    private bool inputReady = false;
+    private bool isSceneLoading = false;
+
     private void Start()
     {
         InitializeGameState();
@@ -47,32 +35,27 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (_inputReady && Input.anyKeyDown && _isGameStarting && IsCursorInZone())
+        if (inputReady && isGameStarting && Input.anyKeyDown && IsCursorInZone())
         {
             StartGame();
         }
     }
 
     #region Game State Management
+
     private void InitializeGameState()
     {
-        Time.timeScale = 0;
-        _isGameStarting = true;
-        _inputReady = false;
+        isGameStarting = true;
+        inputReady = false;
 
         UpdateHUD();
+        _canvasManager.SetState(CanvasState.Start);
 
-        SetCanvasState(_startCanvas, true);
-        SetCanvasState(_permamentCanvas, true);
-        SetCanvasState(_loadingCanvas, false);
-        SetCanvasState(_gameCanvas, false);
-        SetCanvasState(_pauseCanvas, false);
+        Time.timeScale = 0;
     }
 
     private IEnumerator WaitForAllKeysToRelease()
     {
-        yield return null;
-
         float timeout = 5f;
         float elapsedTime = 0f;
 
@@ -82,47 +65,47 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
 
-        _inputReady = true;
+        inputReady = true;
     }
 
     public void StartGame()
     {
-        _isGameStarting = false;
-
+        isGameStarting = false;
         Time.timeScale = 1;
-        SetCanvasState(_startCanvas, false);
-        SetCanvasState(_loadingCanvas, false);
-        SetCanvasState(_gameCanvas, true);
-        SetCanvasState(_pauseCanvas, false);
+        _canvasManager.SetState(CanvasState.Game);
 
-        Debug.Log("Игра началась!");
+        Debug.Log("Game started!");
     }
+
     #endregion
+
     #region HUD
+
     private void UpdateHUD()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-
-        _attemptsText.text = $"{_playerData.LevelsData[currentScene.name].Attempts.ToString()} попытка";
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        _attemptsText.text = $"{_playerData.LevelsData[currentSceneName].Attempts} попытка";
     }
+
     #endregion
+
     #region Zone Check
+
     private bool IsCursorInZone()
     {
-        if (_checkZone == null) return false;
-
-        Vector2 cursorPosition = Input.mousePosition;
-        return RectTransformUtility.RectangleContainsScreenPoint(_checkZone, cursorPosition);
+        return _checkZone != null && RectTransformUtility.RectangleContainsScreenPoint(_checkZone, Input.mousePosition);
     }
+
     #endregion
+
     #region Pause Menu
+
     public void OpenPauseMenu()
     {
         if (Time.timeScale == 0) return;
 
         Time.timeScale = 0;
-        SetCanvasState(_gameCanvas, false);
-        SetCanvasState(_pauseCanvas, true);
+        _canvasManager.SetState(CanvasState.Pause);
     }
 
     public void ClosePauseMenu()
@@ -130,30 +113,39 @@ public class UIManager : MonoBehaviour
         if (Time.timeScale == 1) return;
 
         Time.timeScale = 1;
-        SetCanvasState(_pauseCanvas, false);
-        SetCanvasState(_gameCanvas, true);
+        _canvasManager.SetState(CanvasState.Game);
     }
 
     public void ReturnToMainMenu()
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
+        if (!isSceneLoading)
+        {
+            string currentSceneName = SceneManager.GetActiveScene().name;
 
-        _playerData.LevelsData[currentSceneName].CurrentCheckpoint = 0;
-        LoadSceneByName("MainMenu");
+            _playerData.LevelsData[currentSceneName].CurrentCheckpoint = 0;
+
+            if (currentSceneName != "MainMenu")
+            {
+                LoadSceneByName("MainMenu");
+            }
+        }
     }
+
     #endregion
+
     #region Loading Panel
+
     public void StartLoading()
     {
         Time.timeScale = 0;
-
-        SetCanvasState(_loadingCanvas, true);
-        SetCanvasState(_startCanvas, false);
-        SetCanvasState(_gameCanvas, false);
-        SetCanvasState(_pauseCanvas, false);
+        isGameStarting = false;
+        _canvasManager.SetState(CanvasState.Loading);
     }
+
     #endregion
+
     #region Scene Management
+
     public void LoadSceneByName(string sceneName)
     {
         if (SceneExists(sceneName))
@@ -169,27 +161,52 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
+        Debug.Log($"Начата загрузка сцены: {sceneName}");
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;
 
-        while (!operation.isDone)
+        float timeout = 15f; // Максимальное время ожидания загрузки
+        float elapsedTime = 0f;
+
+        while (!operation.isDone && elapsedTime < timeout)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            Debug.Log($"Прогресс загрузки сцены {sceneName}: {progress * 100}%");
 
             if (_loadingSlider != null)
+            {
                 _loadingSlider.value = progress;
-
-            if (_loadingSlider != null)
-                Debug.Log($"{progress * 100:0}%");
+            }
 
             if (operation.progress >= 0.9f)
             {
+                Debug.Log("Сцена готова к активации. Активируем сцену...");
                 operation.allowSceneActivation = true;
             }
 
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
-        yield return new WaitForSecondsRealtime(0.5f);
+
+        if (elapsedTime >= timeout)
+        {
+            Debug.LogError("Превышено время ожидания загрузки сцены!");
+            // Здесь можно показать сообщение об ошибке пользователю или перезапустить загрузку
+        }
+
+        Debug.Log($"operation.progress: {operation.progress}, isDone: {operation.isDone}, allowSceneActivation: {operation.allowSceneActivation}");
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        if (scene.name == "MainMenu")
+        {
+            Debug.Log("Main Menu scene loaded and activated.");
+        }
+
+        isSceneLoading = false;
     }
 
     private bool SceneExists(string sceneName)
@@ -198,25 +215,17 @@ public class UIManager : MonoBehaviour
         {
             string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
             string sceneFileName = Path.GetFileNameWithoutExtension(scenePath);
+            Debug.Log($"Проверка сцены: {sceneFileName}");
             if (sceneFileName.Equals(sceneName, StringComparison.OrdinalIgnoreCase))
             {
+                Debug.Log($"Сцена {sceneName} найдена.");
                 return true;
             }
         }
+        Debug.LogError($"Сцена {sceneName} не найдена!");
         return false;
     }
-    #endregion
-    #region Utility
-    private void SetCanvasState(GameObject canvas, bool isActive)
-    {
-        if (canvas != null)
-        {
-            canvas.SetActive(isActive);
-        }
-        else
-        {
-            Debug.LogWarning("Attempted to set state of a null canvas.");
-        }
-    }
+
+
     #endregion
 }

@@ -10,11 +10,13 @@ public class LevelButton : MonoBehaviour
     {
         _button = GetComponent<Button>();
     }
-    public void UpdateCoinStatus(int coinsCollected)
+    public void UpdateCoinStatus(int coinsCollected, string levelName)
     {
         for (int i = 0; i < _coinImages.Length; i++)
         {
             _coinImages[i].color = i < coinsCollected ? Color.yellow : Color.gray;
         }
     }
+
+
 }

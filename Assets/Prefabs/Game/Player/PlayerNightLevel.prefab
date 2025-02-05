@@ -473,7 +473,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 0.1}
+  m_Size: {x: 20, y: 20, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5292331541024321991
 GameObject:
@@ -532,6 +532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 5
   _evadeSpeed: 7
+  _notShield: 0
   _shieldTransform: {fileID: 7639487615118656139}
   _shieldRenderer: {fileID: 2622296864126640687}
   _defaultShieldMaterial: {fileID: 2100000, guid: 370385097cc3a614a8d7b8b118a19685,
