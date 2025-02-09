@@ -10,6 +10,8 @@ public class CheckpointManager : MonoBehaviour
 
     private void Awake()
     {
+        _player = FindFirstObjectByType<Player>();
+
         PopulateCheckpoints();
     }
 
@@ -18,7 +20,6 @@ public class CheckpointManager : MonoBehaviour
         RegisterCheckpoints();
         SetPlayerStartPosition();
     }
-
     private void PopulateCheckpoints()
     {
         Checkpoint[] checkpointComponents = GetComponentsInChildren<Checkpoint>();
