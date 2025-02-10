@@ -151,7 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6659c107828de479f1eee43acf63ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireController: {fileID: 0}
   _bulletRenderer: {fileID: 1394972003980813962}
 --- !u!65 &4793243356363715963
 BoxCollider:
@@ -183,7 +182,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6556741200500177896}
-  - component: {fileID: 2296134656428545038}
   - component: {fileID: 6015981455283018430}
   - component: {fileID: 200253188981675524}
   - component: {fileID: 6474014718567472442}
@@ -210,20 +208,6 @@ Transform:
   - {fileID: 1183817822288048051}
   m_Father: {fileID: 1482673666621115070}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2296134656428545038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8999058739901955172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad6659c107828de479f1eee43acf63ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fireController: {fileID: 0}
-  _bulletRenderer: {fileID: 0}
 --- !u!33 &6015981455283018430
 MeshFilter:
   m_ObjectHideFlags: 0

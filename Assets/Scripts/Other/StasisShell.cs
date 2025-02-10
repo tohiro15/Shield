@@ -4,7 +4,6 @@ public class StasisShell : MonoBehaviour
 {
     private FireController _fireController;
     private Renderer _bulletRenderer;
-    private SpriteRenderer _spriteRenderer;
 
     private bool _isPickup = false;
 
@@ -18,23 +17,14 @@ public class StasisShell : MonoBehaviour
             _bulletRenderer = GetComponentInChildren<Renderer>();
         }
 
-        if (_bulletRenderer == null)
-        {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            if (_spriteRenderer == null)
-            {
-                _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-            }
-        }
-
         if (_fireController == null)
         {
             Debug.LogError("FireController не найден в сцене!");
         }
 
-        if (_bulletRenderer == null && _spriteRenderer == null)
+        if (_bulletRenderer == null)
         {
-            Debug.LogError("Ни Renderer, ни SpriteRenderer не найдены на объекте или его дочерних объектах!");
+            Debug.LogError("Renderer не найден на объекте или его дочерних объектах!");
         }
     }
 
@@ -67,9 +57,9 @@ public class StasisShell : MonoBehaviour
             return false;
         }
 
-        if (_bulletRenderer == null && _spriteRenderer == null)
+        if (_bulletRenderer == null)
         {
-            Debug.LogError("Ни BulletRenderer, ни SpriteRenderer не установлены или не найдены!");
+            Debug.LogError("Renderer не найден на объекте или его дочерних объектах!");
             return false;
         }
 
@@ -85,12 +75,6 @@ public class StasisShell : MonoBehaviour
             Color newColor = _bulletRenderer.material.color;
             newColor.a = 100 / 255f;
             _bulletRenderer.material.color = newColor;
-        }
-        else if (_spriteRenderer != null)
-        {
-            Color newColor = _spriteRenderer.color;
-            newColor.a = 100 / 255f;
-            _spriteRenderer.color = newColor;
         }
 
         _isPickup = true;

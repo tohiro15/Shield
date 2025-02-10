@@ -24,6 +24,10 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             Destroy(other.gameObject);
         }
+        else if (other.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Update()
