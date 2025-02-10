@@ -4,37 +4,28 @@ public class FireController : MonoBehaviour
 {
     private GameObject _bulletPrefab;
     private Material _defaultShieldMaterial;
-    private Material _atttackShieldMaterial;
+    private Material _attackShieldMaterial;
     private Transform _bulletSpawn;
 
-    private Renderer _shieldMaterials;
-
+    private Renderer _shieldRenderer;
     private string[] _validTags;
     private float _bulletSpeed;
-
     private bool _canFire = false;
 
-    public void Initialize(Renderer shieldRenderer, GameObject playerBulletPrefab, Material defaultShieldMaterial, Material attackShieldMaterial, Transform bulletSpawnTransform,string[] validTags, float bulletSpeed)
+    public void Initialize(Renderer shieldRenderer, GameObject bulletPrefab, Material defaultShieldMaterial, Material attackShieldMaterial, Transform bulletSpawnTransform, string[] validTags, float bulletSpeed)
     {
-        _shieldMaterials = shieldRenderer;
-
-        _bulletPrefab = playerBulletPrefab;
-
+        _shieldRenderer = shieldRenderer;
+        _bulletPrefab = bulletPrefab;
         _defaultShieldMaterial = defaultShieldMaterial;
-        _shieldMaterials.material = _defaultShieldMaterial;
-
-        _atttackShieldMaterial = attackShieldMaterial;
-
+        _attackShieldMaterial = attackShieldMaterial;
         _bulletSpawn = bulletSpawnTransform;
-
         _bulletSpeed = bulletSpeed;
 
-        _validTags = new string[validTags.Length];
-        for (int i = 0; i < validTags.Length; i++)
-        {
-            _validTags[i] = validTags[i];
-        }
+        _validTags = (string[])validTags.Clone();
+
+        _shieldRenderer.material = _defaultShieldMaterial;
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && _canFire)
@@ -42,6 +33,7 @@ public class FireController : MonoBehaviour
             Fire();
         }
     }
+
     private void Fire()
     {
         GameObject newBullet = Instantiate(_bulletPrefab, _bulletSpawn.position, _bulletSpawn.rotation);
@@ -52,15 +44,14 @@ public class FireController : MonoBehaviour
             bulletScript.Initialize(_validTags, _bulletSpeed);
         }
 
-        _shieldMaterials.material = _defaultShieldMaterial;
-
+        _shieldRenderer.material = _defaultShieldMaterial;
         _canFire = false;
     }
+
     public void LoadBullet()
     {
-        Debug.Log("Пуля словлена!");
-        _shieldMaterials.material = _atttackShieldMaterial;
+        Debug.Log("Bullet captured!");
+        _shieldRenderer.material = _attackShieldMaterial;
         _canFire = true;
     }
-
 }

@@ -5,14 +5,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Player Settings")]
-    [Space]
-
     [SerializeField] private float _movementSpeed;
     [SerializeField] private float _evadeSpeed;
 
     [Header("Shield Settings")]
-    [Space]
-
     [SerializeField] private bool _notShield;
     [SerializeField] private Transform _shieldTransform;
     [SerializeField] private Renderer _shieldRenderer;
@@ -22,8 +18,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float _shieldRotateSpeed;
 
     [Header("Bullet Settings")]
-    [Space]
-
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _bulletSpawnTransform;
     [SerializeField] private float _bulletSpeed;
@@ -36,76 +30,76 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>() ?? gameObject.AddComponent<Rigidbody>();
 
         if (_notShield)
         {
-            Debug.Log("Щит выключен!");
-            _shieldTransform.gameObject.SetActive(false);
+            Debug.Log("Shield is disabled!");
+            _shieldTransform?.gameObject.SetActive(false);
         }
 
-        if (_shieldRenderer == null && _notShield == false)
+        ValidateComponents();
+        InitializeControllers();
+    }
+
+    private void ValidateComponents()
+    {
+        if (_shieldRenderer == null && !_notShield)
         {
-            Debug.LogError("Shield Renderer не найден! Компонент будет инициализирован автоматически!");
-            _shieldRenderer = _shieldTransform.gameObject.GetComponent<Renderer>();
+            Debug.LogError("Shield Renderer not found! It will be initialized automatically.");
+            _shieldRenderer = _shieldTransform?.GetComponent<Renderer>();
         }
 
-        if (_defaultShieldMaterial == null && _notShield == false)
+        if (_defaultShieldMaterial == null && !_notShield)
         {
-            Debug.LogError("Default Shield Material не найден!");
+            Debug.LogError("Default Shield Material not found!");
         }
 
-        if (_attackShieldMaterial == null && _notShield == false)
+        if (_attackShieldMaterial == null && !_notShield)
         {
-            Debug.LogError("Attack Shield Material не найден!");
+            Debug.LogError("Attack Shield Material not found!");
         }
 
-        if (_rigidbody == null)
+        if (_shieldTransform == null && !_notShield)
         {
-            Debug.LogError("Rigidbody не найден! Компонент будет добавлен автоматически.");
-            _rigidbody = gameObject.AddComponent<Rigidbody>();
+            Debug.LogError("Shield Transform not assigned!");
         }
 
-        _playerController = GetComponent<PlayerController>();
-        if (_playerController == null)
+        if (_bulletPrefab == null)
         {
-            Debug.LogError("PlayerController не найден!");
+            Debug.LogError("Bullet Prefab not assigned!");
         }
 
-        _shieldController = GetComponent<ShieldController>();
-        if (_shieldController == null && _notShield == false)
+        if (_bulletSpawnTransform == null)
         {
-            Debug.LogError("ShieldController не найден!");
+            Debug.LogError("Bullet Spawn Transform not assigned!");
         }
-        else
+    }
+
+    private void InitializeControllers()
+    {
+        _playerController = GetComponent<PlayerController>() ?? throw new MissingComponentException("PlayerController not found!");
+
+        if (!_notShield)
         {
+            _shieldController = GetComponent<ShieldController>() ?? throw new MissingComponentException("ShieldController not found!");
             _shieldController.Initialize(transform, _shieldTransform, _distanceFromPlayer);
-        }
 
-        _fireController = GetComponent<FireController>();
-        if (_fireController == null && _notShield == false)
-        {
-            Debug.LogError("FireController не найден!");
-        }
-        else if(_notShield == false)
-        {
+            _fireController = GetComponent<FireController>() ?? throw new MissingComponentException("FireController not found!");
             _fireController.Initialize(_shieldRenderer, _bulletPrefab, _defaultShieldMaterial, _attackShieldMaterial, _bulletSpawnTransform, _validTags, _bulletSpeed);
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (_playerController != null)
-        {
-            _playerController.Movement(_movementSpeed, _evadeSpeed, _rigidbody);
-        }
+        _playerController?.Movement(_movementSpeed, _evadeSpeed, _rigidbody);
     }
 
     private void Update()
     {
-        if (_shieldController != null)
+        if (!_notShield)
         {
-            _shieldController.RotateAroundPlayer(transform, _shieldTransform, _shieldRotateSpeed);
+            _shieldController?.RotateAroundPlayer(transform, _shieldTransform, _shieldRotateSpeed);
         }
     }
 }
