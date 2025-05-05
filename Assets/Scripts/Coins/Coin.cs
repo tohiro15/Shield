@@ -21,7 +21,7 @@ public class Coin : MonoBehaviour
             if (other.CompareTag(tag))
             {
                 _playerData.CoinPickUp(_currentScene.name);
-                _soundManager.CoinPickupSoundPlay();
+                _soundManager?.CoinPickupSoundPlay();
                 Debug.Log("Монетка подобрана");
                 gameObject.SetActive(false);
             }

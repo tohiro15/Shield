@@ -1,105 +1,58 @@
 using UnityEngine;
 
-[DefaultExecutionOrder(-100)]
-[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
-    [Header("Player Settings")]
-    [SerializeField] private float _movementSpeed;
-    [SerializeField] private float _evadeSpeed;
+    [Header ("Player Controllers")]
+    [Space]
 
-    [Header("Shield Settings")]
-    [SerializeField] private bool _notShield;
-    [SerializeField] private Transform _shieldTransform;
-    [SerializeField] private Renderer _shieldRenderer;
-    [SerializeField] private Material _defaultShieldMaterial;
-    [SerializeField] private Material _attackShieldMaterial;
-    [SerializeField] private float _distanceFromPlayer;
-    [SerializeField] private float _shieldRotateSpeed;
+    [SerializeField] private PlayerController _playerController;
+    [SerializeField] private ShieldController _shieldController;
+    [SerializeField] private FireController _fireController;
 
-    [Header("Bullet Settings")]
-    [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private Transform _bulletSpawnTransform;
-    [SerializeField] private float _bulletSpeed;
-    [SerializeField] private string[] _validTags;
+    [Header ("Player Mod's")]
+    [Space]
 
-    private PlayerController _playerController;
-    private ShieldController _shieldController;
-    private FireController _fireController;
-    private Rigidbody _rigidbody;
+    [SerializeField] private bool _fireMode = true;
+    [SerializeField] private bool _shieldMode = true;
+
+    private IFire _fire;
+    private IMovable _movement;
+    private IShield _shield;
 
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>() ?? gameObject.AddComponent<Rigidbody>();
-
-        if (_notShield)
+        if (_playerController != null)
         {
-            Debug.Log("Shield is disabled!");
-            _shieldTransform?.gameObject.SetActive(false);
+            _movement = _playerController;
         }
 
-        ValidateComponents();
-        InitializeControllers();
-    }
+        if (!_shieldMode) _fireMode = false;
 
-    private void ValidateComponents()
-    {
-        if (_shieldRenderer == null && !_notShield)
+        if (_shieldController != null && _fireController != null && _fireMode && _shieldMode)
         {
-            Debug.LogError("Shield Renderer not found! It will be initialized automatically.");
-            _shieldRenderer = _shieldTransform?.GetComponent<Renderer>();
+            _fire = _fireController;
+            _fireController.Initialize(_shieldController);
         }
 
-        if (_defaultShieldMaterial == null && !_notShield)
+        if (_shieldController != null && _shieldMode)
         {
-            Debug.LogError("Default Shield Material not found!");
+            _shield = _shieldController;
+            _shield.Initialize();
         }
-
-        if (_attackShieldMaterial == null && !_notShield)
-        {
-            Debug.LogError("Attack Shield Material not found!");
-        }
-
-        if (_shieldTransform == null && !_notShield)
-        {
-            Debug.LogError("Shield Transform not assigned!");
-        }
-
-        if (_bulletPrefab == null)
-        {
-            Debug.LogError("Bullet Prefab not assigned!");
-        }
-
-        if (_bulletSpawnTransform == null)
-        {
-            Debug.LogError("Bullet Spawn Transform not assigned!");
-        }
-    }
-
-    private void InitializeControllers()
-    {
-        _playerController = GetComponent<PlayerController>() ?? throw new MissingComponentException("PlayerController not found!");
-
-        if (!_notShield)
-        {
-            _shieldController = GetComponent<ShieldController>() ?? throw new MissingComponentException("ShieldController not found!");
-            _shieldController.Initialize(transform, _shieldTransform, _distanceFromPlayer);
-
-            _fireController = GetComponent<FireController>() ?? throw new MissingComponentException("FireController not found!");
-            _fireController.Initialize(_shieldRenderer, _bulletPrefab, _defaultShieldMaterial, _attackShieldMaterial, _bulletSpawnTransform, _validTags, _bulletSpeed);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        _playerController?.Movement(_movementSpeed, _evadeSpeed, _rigidbody);
     }
 
     private void Update()
     {
-        if (!_notShield)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            _shieldController?.RotateAroundPlayer(transform, _shieldTransform, _shieldRotateSpeed);
+            _fire?.Fire();
         }
+
+        _shield?.RotateAroundPlayer();
+    }
+
+    private void FixedUpdate()
+    {
+        _movement?.Movement();
     }
 }

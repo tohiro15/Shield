@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class StasisShell : MonoBehaviour
 {
+    private ShieldController _shieldController;
     private FireController _fireController;
     private Renderer _bulletRenderer;
 
@@ -9,6 +11,7 @@ public class StasisShell : MonoBehaviour
 
     private void Awake()
     {
+        _shieldController = FindObjectOfType<ShieldController>();
         _fireController = FindObjectOfType<FireController>();
 
         _bulletRenderer = GetComponent<Renderer>();
@@ -17,9 +20,18 @@ public class StasisShell : MonoBehaviour
             _bulletRenderer = GetComponentInChildren<Renderer>();
         }
 
-        if (_fireController == null)
+        if (_shieldController == null)
         {
-            Debug.LogError("FireController не найден в сцене!");
+            Debug.LogError("Shield Controller не найден в сцене!");
+
+            return;
+        }
+
+        if( _fireController == null)
+        {
+            Debug.LogError("Fire Controller не найден в сцене!");
+
+            return;
         }
 
         if (_bulletRenderer == null)
@@ -41,34 +53,14 @@ public class StasisShell : MonoBehaviour
             return;
         }
 
-        if (!ValidateComponents())
-        {
-            return;
-        }
+        if (_shieldController == null || _fireController == null) return;
 
         CollectStasisShell();
     }
 
-    private bool ValidateComponents()
-    {
-        if (_fireController == null)
-        {
-            Debug.LogError("FireController не установлен или не найден!");
-            return false;
-        }
-
-        if (_bulletRenderer == null)
-        {
-            Debug.LogError("Renderer не найден на объекте или его дочерних объектах!");
-            return false;
-        }
-
-        return true;
-    }
-
     private void CollectStasisShell()
     {
-        _fireController.LoadBullet();
+        _shieldController.LoadBullet();
 
         if (_bulletRenderer != null)
         {

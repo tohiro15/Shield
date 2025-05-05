@@ -9,14 +9,18 @@ public class BarrierBullet : MonoBehaviour
     {
         if (other.CompareTag("Shield"))
         {
+            ShieldController shieldController = other.GetComponentInParent<ShieldController>();
             FireController fireController = other.GetComponentInParent<FireController>();
-            if (fireController != null)
+
+            if (shieldController != null && fireController != null)
             {
-                fireController.LoadBullet();
+                shieldController.LoadBullet();
             }
             else
             {
-                Debug.LogWarning("FireController not found on parent of Shield!", this);
+                Debug.LogWarning("fire not found on parent of Shield!", this);
+
+                return;
             }
 
             Destroy(gameObject); // Заменить на Object Pooling для оптимизации
