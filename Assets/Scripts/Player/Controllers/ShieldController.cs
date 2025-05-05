@@ -4,13 +4,19 @@ using UnityEngine;
 public class ShieldController : MonoBehaviour, IShield
 {
     [Header("Shield Settings")]
+    [Space]
+
+    [SerializeField] private float _distanceFromPlayer;
+    [SerializeField] private float _shieldRotateSpeed;
+
+    [Header("Components")]
+    [Space]
+
     [SerializeField] private Transform _shieldTransform;
     [SerializeField] private Renderer _shieldRenderer;
     [SerializeField] private Material _defaultShieldMaterial;
     [SerializeField] private Material _attackShieldMaterial;
     [SerializeField] private Transform _targetTransform;
-    [SerializeField] private float _distanceFromPlayer;
-    [SerializeField] private float _shieldRotateSpeed;
 
     public Action BulletLoaded;
 

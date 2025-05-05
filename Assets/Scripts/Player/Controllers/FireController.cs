@@ -3,10 +3,17 @@ using UnityEngine;
 
 public class FireController : MonoBehaviour, IFire
 {
-    [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private Transform _bulletSpawn;
+    [Header("Fire Settings")]
+    [Space]
+
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private string[] _validTags;
+
+    [Header("Bullet Spawn Settings")]
+    [Space]
+
+    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private Transform _bulletSpawn;
     
     public event Action OnFire;
 

@@ -5359,9 +5359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016f199b5700c8a4991f126d53910000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireController: {fileID: 8300908481978614918}
-  _shieldController: {fileID: 6720610177949428370}
   _playerController: {fileID: 1469216220328157760}
+  _shieldController: {fileID: 6720610177949428370}
+  _fireController: {fileID: 8300908481978614918}
   _fireMode: 1
   _shieldMode: 1
 --- !u!114 &1469216220328157760
@@ -5390,13 +5390,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b42985c3a9f854e869226b21ad3c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 0}
-  _bulletSpawn: {fileID: 0}
   _bulletSpeed: 9
   _validTags:
   - Box
   - Barrel
   - Blade
+  _bulletPrefab: {fileID: 6336558582189037822, guid: 80179ac14a9735f4bb7a3dfee37734e6,
+    type: 3}
+  _bulletSpawn: {fileID: 1196000883949607243}
 --- !u!114 &6720610177949428370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5409,6 +5410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21444e2808c3aa7448caeab6772f53aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _distanceFromPlayer: 1
+  _shieldRotateSpeed: 1
   _shieldTransform: {fileID: 7639487615118656139}
   _shieldRenderer: {fileID: 2622296864126640687}
   _defaultShieldMaterial: {fileID: 2100000, guid: 370385097cc3a614a8d7b8b118a19685,
@@ -5416,8 +5419,6 @@ MonoBehaviour:
   _attackShieldMaterial: {fileID: 2100000, guid: efb0657255c8da74ab9c59000a308312,
     type: 2}
   _targetTransform: {fileID: 7490686678745368543}
-  _distanceFromPlayer: 1
-  _shieldRotateSpeed: 1
 --- !u!33 &8600018991563871573
 MeshFilter:
   m_ObjectHideFlags: 0
